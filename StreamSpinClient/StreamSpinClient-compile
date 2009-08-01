@@ -1,3 +1,0 @@
-#!/bin/sh
-APPDIR=`dirname $0`;
-java  -Xmx256M -cp "$APPDIR/src:$APPDIR/bin:/home/jenslyn/tep/oophm/build/staging/gwt-linux-0.0.0/gwt-user.jar:/home/jenslyn/tep/oophm/build/staging/gwt-linux-0.0.0/gwt-dev.jar:/usr/local/gwt-gadgets-1.0.3/gwt-gadgets.jar" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.streamspin.StreamSpinClient;
