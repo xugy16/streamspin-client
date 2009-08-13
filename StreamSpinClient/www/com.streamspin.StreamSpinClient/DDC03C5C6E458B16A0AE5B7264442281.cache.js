@@ -494,7 +494,7 @@ function eQ(b){var a=$doc.createElement(Ae);a.src=Be;a.scrolling=Ce;a.frameBorde
 function fQ(a,c){if(a.__frame){a.__frame.style.visibility=c?wb:tl}}
 function cR(b,a){if(a.a){b.g.r.innerHTML=ff}else{b.g.r.innerHTML=gf}}
 function gR(a){CH(a.h,hf,jf,-1);cR(a,(sR(),tR))}
-function hR(){var a,c,d,e;e=kf;try{e=$wnd._IG_GetCachedUrl(e,refreshInterval);d=dt(new Ds(),(ft(),it),e);$wnd.alert(e);ht(d,null,new wQ())}catch(a){a=jz(a);if(hv(a,16)){c=a;$wnd.alert(c.D())}else throw a}}
+function hR(){var a,c,d,e;e=kf;try{e=$wnd._IG_GetCachedUrl(e);d=dt(new Ds(),(ft(),it),e);$wnd.alert(e);ht(d,null,new wQ())}catch(a){a=jz(a);if(hv(a,16)){c=a;$wnd.alert(c.D())}else throw a}}
 function iR(){return Fx}
 function kR(a){}
 function jR(a){}
