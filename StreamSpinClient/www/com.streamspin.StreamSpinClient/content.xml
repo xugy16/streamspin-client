@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<root id="rootNode">
+	<msg id="msgNode0">
+		<headline>some headline</headline>
+		<content>some content for you</content>
+	</msg>
+	<msg id="msgNode1">
+		<headline>more of some headline</headline>
+		<content>some content for you and ze client, whoot</content>
+	</msg>
+</root>
