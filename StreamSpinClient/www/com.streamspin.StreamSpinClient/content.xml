@@ -6,6 +6,42 @@
 	</msg>
 	<msg id="msgNode1">
 		<headline>more of some headline</headline>
-		<content>some content for you and ze client, whoot</content>
+		<content>
+some content for you and ze client, whoot
+	protected void makeMainLeftMenu() {
+		MenuBar debugMenu = new MenuBar(true);
+		debugMenu.addItem("the", cmd);
+		debugMenu.addItem("foo", cmd);
+
+		MenuBar setLocationMenu = new MenuBar(true);
+		setLocationMenu.addItem("Use GPS", parseXml); // probably not needed for web
+		// client
+		setLocationMenu.addItem("the", cmd);
+		setLocationMenu.addItem("bar", cmd);
+		setLocationMenu.addItem("menu", cmd);
+
+		MenuBar startServiceMenu = new MenuBar(true);
+		startServiceMenu.addItem("the", cmd);
+		startServiceMenu.addItem("bar", cmd);
+		startServiceMenu.addItem("menu", cmd);
+
+		MenuBar setProfileMenu = new MenuBar(true);
+		setProfileMenu.addItem("Profile 1", cmd);
+		setProfileMenu.addItem("Profile 2", cmd);
+
+		MenuBar menuMenu = new MenuBar(true);
+		menuMenu.addItem("Enable debug Mode", debugMenu);
+		menuMenu.addItem("Exit", testConnect);
+		menuMenu.addItem("Write Message", parseXml);
+
+		menuMenu.addItem("SetLocation", setLocationMenu);
+		menuMenu.addItem("Start Service", startServiceMenu);
+		menuMenu.addItem("Set Profile", setProfileMenu);
+
+		// the main menu
+		mainLeftMenu.addItem("Menu", menuMenu);
+		mainLeftMenu.setAutoOpen(false);
+		mainLeftMenu.setWidth("65px");
+</content>
 	</msg>
 </root>
