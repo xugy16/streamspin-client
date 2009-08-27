@@ -72,7 +72,7 @@ function nN(){}
 _=nN.prototype=new yH();_.gC=pN;_.tI=0;function hn(b,a){fB();jB(null);b.a=a;return b}
 function kn(){return dp}
 function gn(){}
-_=gn.prototype=new nN();_.gC=kn;_.tI=0;_.a=null;function tn(d,a){var c,b;c=hn(new gn(),nn(new mn(),d).a);$wnd.alert(Dd+FF);FF=c.a;$wnd.alert(ie+FF);$wnd.confirm(FF.substr(10,40-10));b=$wnd.prompt(FF.substr(10,40-10),te);$wnd.alert(b)}
+_=gn.prototype=new nN();_.gC=kn;_.tI=0;_.a=null;function tn(d,a){var c,b;c=hn(new gn(),nn(new mn(),d).a);$wnd.alert(Dd+FF);FF=c.a;$wnd.alert(ie+FF);$wnd.confirm(FF.substr(10,140-10));b=$wnd.prompt(FF.substr(10,140-10),te);$wnd.alert(b)}
 function nn(a,b){a.a=b;return a}
 function pn(){return ep}
 function mn(){}

@@ -80,7 +80,7 @@ function eN(){}
 _=eN.prototype=new rH();_.gC=gN;_.tI=0;function im(b,a){xA();BA(null);b.a=a;return b}
 function km(){return jo}
 function hm(){}
-_=hm.prototype=new eN();_.gC=km;_.tI=0;_.a=null;function tm(d,a){var c,b;c=im(new hm(),nm(new mm(),d).a);$wnd.alert(gd+yF);yF=c.a;$wnd.alert(rd+yF);$wnd.confirm(yF.substr(10,40-10));b=$wnd.prompt(yF.substr(10,40-10),Dd);$wnd.alert(b)}
+_=hm.prototype=new eN();_.gC=km;_.tI=0;_.a=null;function tm(d,a){var c,b;c=im(new hm(),nm(new mm(),d).a);$wnd.alert(gd+yF);yF=c.a;$wnd.alert(rd+yF);$wnd.confirm(yF.substr(10,140-10));b=$wnd.prompt(yF.substr(10,140-10),Dd);$wnd.alert(b)}
 function nm(a,b){a.a=b;return a}
 function pm(){return ko}
 function mm(){}
