@@ -79,7 +79,7 @@ function zL(){}
 _=zL.prototype=new gG();_.gC=BL;_.tI=0;function am(b,a){aA();eA(null);b.a=a;return b}
 function cm(){return ao}
 function Fl(){}
-_=Fl.prototype=new zL();_.gC=cm;_.tI=0;_.a=null;function lm(d,a){var c,b;c=am(new Fl(),fm(new em(),d).a);$wnd.alert(gd+nE);nE=c.a;$wnd.alert(rd+nE);$wnd.confirm(nE.substr(10,40-10));b=$wnd.prompt(nE.substr(10,40-10),Dd);$wnd.alert(b)}
+_=Fl.prototype=new zL();_.gC=cm;_.tI=0;_.a=null;function lm(d,a){var c,b;c=am(new Fl(),fm(new em(),d).a);$wnd.alert(gd+nE);nE=c.a;$wnd.alert(rd+nE);$wnd.confirm(nE.substr(10,140-10));b=$wnd.prompt(nE.substr(10,140-10),Dd);$wnd.alert(b)}
 function fm(a,b){a.a=b;return a}
 function hm(){return bo}
 function em(){}

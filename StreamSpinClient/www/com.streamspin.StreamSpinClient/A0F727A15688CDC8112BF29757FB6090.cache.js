@@ -83,7 +83,7 @@ function wN(){}
 _=wN.prototype=new dI();_.gC=yN;_.tI=0;function tm(b,a){dB();hB(null);b.a=a;return b}
 function vm(){return vo}
 function sm(){}
-_=sm.prototype=new wN();_.gC=vm;_.tI=0;_.a=null;function Em(d,a){var c,b;c=tm(new sm(),ym(new xm(),d).a);$wnd.alert(gd+kG);kG=c.a;$wnd.alert(rd+kG);$wnd.confirm(kG.substr(10,40-10));b=$wnd.prompt(kG.substr(10,40-10),Dd);$wnd.alert(b)}
+_=sm.prototype=new wN();_.gC=vm;_.tI=0;_.a=null;function Em(d,a){var c,b;c=tm(new sm(),ym(new xm(),d).a);$wnd.alert(gd+kG);kG=c.a;$wnd.alert(rd+kG);$wnd.confirm(kG.substr(10,140-10));b=$wnd.prompt(kG.substr(10,140-10),Dd);$wnd.alert(b)}
 function ym(a,b){a.a=b;return a}
 function Am(){return wo}
 function xm(){}

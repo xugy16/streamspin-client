@@ -80,7 +80,7 @@ function xM(){}
 _=xM.prototype=new eH();_.gC=zM;_.tI=0;function lm(b,a){tA();xA(null);b.a=a;return b}
 function nm(){return mo}
 function km(){}
-_=km.prototype=new xM();_.gC=nm;_.tI=0;_.a=null;function wm(d,a){var c,b;c=lm(new km(),qm(new pm(),d).a);$wnd.alert(gd+lF);lF=c.a;$wnd.alert(rd+lF);$wnd.confirm(lF.substr(10,40-10));b=$wnd.prompt(lF.substr(10,40-10),Dd);$wnd.alert(b)}
+_=km.prototype=new xM();_.gC=nm;_.tI=0;_.a=null;function wm(d,a){var c,b;c=lm(new km(),qm(new pm(),d).a);$wnd.alert(gd+lF);lF=c.a;$wnd.alert(rd+lF);$wnd.confirm(lF.substr(10,140-10));b=$wnd.prompt(lF.substr(10,140-10),Dd);$wnd.alert(b)}
 function qm(a,b){a.a=b;return a}
 function sm(){return no}
 function pm(){}
