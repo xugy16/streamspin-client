@@ -210,7 +210,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainLeftMenu() {
 		
 		UserInfo menuItems = null;
-		Window.alert("3 "+ssAnswer.getAnswer());
 		try{
 			menuItems = XmlParser.instance().userInfoXmlParsing(ssAnswer.getAnswer());
 		} catch (Exception e) {
@@ -403,16 +402,15 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 					"<img border=\"0\" src=\""+GWT.getModuleBaseURL() + "images/ajax-loader.gif\" /> " +
 							"</center>");//width=\"304\" height=\"228\"
 			cc.setSize("" + Window.getClientWidth() * 0.95, ""+ Window.getClientHeight() * 0.9);
-//			cc.addClickListener(new ClickListener() {
-//				public void onClick(Widget sender) {
-//					self.hide();
-//				}
-//			});
+			cc.addClickListener(new ClickListener() {
+				public void onClick(Widget sender) {
+					self.hide();
+				}
+			});
 			setWidget(cc);
 
 			final Timer timer = new Timer() {
 				public void run() {
-					Window.alert("2: "+ssAnswer.getAnswer());
 					if(ssAnswer.getAnswer()!=null){
 						cancel();
 						makeMain();	
@@ -421,16 +419,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				}
 			};
 			
-			t = new Timer() {
-				public void run(){
-					Window.alert("1: "+ssAnswer.getAnswer());
-					if(ssAnswer.getAnswer()!=null){
-						timer.schedule(100);
-					}
-				}
-			};
-			
-			timer.scheduleRepeating(5000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
+			timer.scheduleRepeating(10000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
 		}
 	}
 }
