@@ -431,7 +431,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				}
 			};
 			
-			t.scheduleRepeating(3000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
+			t.scheduleRepeating(5000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
 		}
 	}
 }
