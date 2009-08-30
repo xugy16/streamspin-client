@@ -635,7 +635,7 @@ function BY(){$wnd.alert(uf+this.a+vf+this.b)}
 function CY(){return yz}
 function yY(){}
 _=yY.prototype=new e4();_.E=BY;_.gC=CY;_.tI=83;_.a=0;_.b=null;function eZ(){eZ=c_;zN()}
-function dZ(d,c){var a,b,e;eZ();d.a=c;uN(d,false);cO(d);b=d;a=mI(new lI());a.x.innerHTML=wf+$moduleBase+xf+zf||up;jQ(a,up+(BF(),DF).clientWidth*0.95,up+DF.clientHeight*0.9);fP(d,a);BN(d);e=FY(new EY(),d,b);eE(e,1000);return d}
+function dZ(d,c){var a,b,e;eZ();d.a=c;uN(d,false);cO(d);b=d;a=mI(new lI());a.x.innerHTML=wf+$moduleBase+xf+zf||up;jQ(a,up+(BF(),DF).clientWidth*0.95,up+DF.clientHeight*0.9);fP(d,a);BN(d);e=FY(new EY(),d,b);eE(e,3000);return d}
 function fZ(){return Az}
 function DY(){}
 _=DY.prototype=new BM();_.gC=fZ;_.tI=84;_.a=null;function aZ(){aZ=c_;cE()}
