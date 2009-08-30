@@ -1,113 +1,439 @@
 package com.streamspin.client;
 
-
+import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.IntrinsicFeature;
+import com.google.gwt.gadgets.client.NeedsDynamicHeight;
+import com.google.gwt.gadgets.client.NeedsIntrinsics;
 import com.google.gwt.gadgets.client.UserPreferences;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
-import com.google.gwt.user.client.*;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.VerticalSplitPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 
-@ModulePrefs(title = "StreamSpin Client", author = "jenslyn", author_email = "jenslyn42@gmail.com")
-public class StreamSpinClient extends Gadget<UserPreferences> {
 
+
+/**
+ * @author jenslyn
+ * @version 0.3.5
+ *
+ */
+@ModulePrefs(title = "StreamSpin Client", author = "jenslyn", author_email = "jenslyn42@gmail.com")
+public class StreamSpinClient extends Gadget<UserPreferences> implements
+		NeedsDynamicHeight, NeedsIntrinsics{
+
+	private DynamicHeightFeature gadgetHeightFeature;
+	private static IntrinsicFeature intrinsics;
 	private VerticalPanel mainPanel = new VerticalPanel();
 	private HorizontalPanel mainMenuPanel = new HorizontalPanel();
-	private VerticalSplitPanel mainWindowPanel = new VerticalSplitPanel();
-	private ListBox mainTopWindowListBox = new ListBox();
+	private VerticalPanel mainWindowPanel = new VerticalPanel();
+	private ListBox mainTopWindowListBox = new ListBox(false);
 	private TextArea mainBottomWindowTextArea = new TextArea();
-	private MenuBar mainRightMenu = new MenuBar();
-	private Button mainLeftButton = new Button();
+	private MenuBar mainLeftMenu = new MenuBar();
+	private Button mainRightButton = new Button("someTest");
 	private Label mainStatusLabel = new Label();
-	private HTML mainTitleBar = new HTML();
-	//Image image = new Image(GWT.getModuleBaseURL() + "images/somePic.gif");
+	private HTML titleBar = new HTML();
+	private VerticalPanel loginPanel = new VerticalPanel();
+	private TextBox loginUnTextBox = new TextBox();
+	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
+	private Button loginButton = new Button();
+	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
+	private Timer t;
+	public static int UID = -1;
+	public static String USERNAME = null;
+	public static String PASSWORD = null;
+	
+
+	
+	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
+    AnswerWrapper ssAnswer = new AnswerWrapper();
+
+	// Image image = new Image(GWT.getModuleBaseURL() + "images/somePic.gif");
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.google.gwt.gadgets.client.Gadget#init(com.google.gwt.gadgets.client
+	 * @see *
+	 * com.google.gwt.gadgets.client.Gadget#init(com.google.gwt.gadgets.client *
 	 * .UserPreferences)
-	 */
+	 */	
+
+
 	@Override
 	protected void init(UserPreferences preferences) {
+		//StreamSpinContact.instance().contactStreamSpin(8, ssAnswer);
+		new StreamSpinContact().contactStreamSpin(8, ssAnswer);
+		new startUpLoadingScreen();
+		// showLogin();
+	}
 
-		Command cmd = new Command() {
-			public void execute() {
-				Window.alert("You selected a menu item!");
-			}
-		};
+	public void initializeFeature(DynamicHeightFeature heightFeature) {
+		this.gadgetHeightFeature = heightFeature;
+	}
 
-		mainStatusLabel.setText("online stuff");
+	public void initializeFeature(IntrinsicFeature feature) {
+		this.intrinsics = feature;	
+	}
 
-		MenuBar debugMenu = new MenuBar(true);
-		debugMenu.addItem("the", cmd);
-		debugMenu.addItem("foo", cmd);
+	public static IntrinsicFeature getIntrinsics() {
+		return intrinsics;
+	}
+	
+	//Used for empty menu items, where not meant to be presseed
+	Command cmd = new Command() {
+		public void execute() {}
+	};
+	
+	//Not implemented command, used for 
+	Command ni = new Command() { 
+		public void execute() {
+			Window.alert("You selected a menu item which has not yet been implemented!");
+		}
+	};
 
-		MenuBar setLocationMenu = new MenuBar(true);
-		setLocationMenu.addItem("Use GPS", cmd); // probably not needed for web
-		// client
-		setLocationMenu.addItem("the", cmd);
-		setLocationMenu.addItem("bar", cmd);
-		setLocationMenu.addItem("menu", cmd);
-
-		MenuBar startServiceMenu = new MenuBar(true);
-		startServiceMenu.addItem("the", cmd);
-		startServiceMenu.addItem("bar", cmd);
-		startServiceMenu.addItem("menu", cmd);
-
-		MenuBar setProfileMenu = new MenuBar(true);
-		setProfileMenu.addItem("Profile 1", cmd);
-		setProfileMenu.addItem("Profile 2", cmd);
-
-		// the main menu
-		mainRightMenu.addItem("Enable debug Mode", debugMenu);
-		mainRightMenu.addItem("Exit", cmd);
-		mainRightMenu.addItem("SetLocation", setLocationMenu);
-		mainRightMenu.addItem("Start Service", startServiceMenu);
-		mainRightMenu.addItem("Set Profile", setProfileMenu);
-
-		mainLeftButton.addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
-				showMessagePanel();
-			}
-		});
-		mainLeftButton.setText("Send Message");
-		mainLeftButton.setTitle("You can send messages to your friends with this");
-
-		mainMenuPanel.add(mainLeftButton);
-		mainMenuPanel.add(mainRightMenu);
+	Command testConnect = new Command() {
+		public void execute() {
+//			StreamSpinContact.instance().contactStreamSpin(8, ssAnswer);
+			new StreamSpinContact().contactStreamSpin(8, ssAnswer);
+		}
+	};
+	
+	private class setLocation implements Command
+	{
+		private Double lon, lat;
 		
-		mainWindowPanel.add(mainTopWindowListBox);
-		mainWindowPanel.add(mainBottomWindowTextArea);
+		public setLocation(Double longtitude, Double latitude)
+		{
+			this.lon = longtitude;
+			this.lat = latitude;
+		}
 		
-		mainTitleBar.setText("buhu");
+		public void execute() {
+			Window.alert("Longtitude: "+lon+"\nLatitude: "+lat);
+			// TODO make command which sets location
+		}
+	}
+	
+	private class startService implements Command
+	{
+		private int id;
+		private String startURL;
+		
+		public startService(int id, String StartUrl)
+		{
+			this.id = id;
+			this.startURL = StartUrl;
+		}
+		
+		public void execute() {
+			Window.alert("Id: "+id+"\nstart url: "+startURL);
+			// TODO make command which starts service
+		}
+	}
+	
+	private class setProfile implements Command
+	{
+		private int id;
+		
+		public setProfile(int id)
+		{
+			this.id = id;
+		}
+		
+		public void execute() {
+			Window.alert("Id: "+id);
+			// TODO make command which sets profile
+		}
+	}
 
-		mainPanel.add(mainTitleBar);
+	Command writeMessage = new Command() {
+		public void execute() {
+			new UserMessage();
+		}
+	};
+	
+	protected void makePic() {
+		pic.setUrl(GWT.getModuleBaseURL() + "images/daisy.gif");
+	}
+
+	protected void makeMain() {
+		
+		makeMainMenu();
+		makeMainWindowPanel();
+		makeMainOnlineStatus(true);
+
+		mainPanel.add(mainMenuPanel);
 		mainPanel.add(mainWindowPanel);
 		mainPanel.add(mainStatusLabel);
-		mainPanel.add(mainMenuPanel);
-		
-		
-		RootPanel.get("ssClient").add(mainPanel);
+
+		mainPanel.setHeight("300px");
+		mainPanel.setWidth("100%");
+		RootPanel.get().add(mainPanel);
+
+		// gadget specific code to adjust height
+		gadgetHeightFeature.getContentDiv();
+		gadgetHeightFeature.adjustHeight();
+
 
 	}
 
-	protected void showMessagePanel() {
-		// TODO Auto-generated method stub
-		
+	protected void makeWindowTitle(String string) {
+		titleBar.setText(string);
 	}
 
+	protected void makeMainOnlineStatus(Boolean online) {
+		if (online) {
+			mainStatusLabel.getElement().setInnerHTML("Status: <b>Online</b>");
+		} else {
+			mainStatusLabel.getElement().setInnerHTML("Status: <b>Offline</b>");
+		}
+	}
+	
+
+	// TODO add correct method calls for menu items
+	protected void makeMainLeftMenu() {
+		
+		UserInfo menuItems = null;
+		try{
+			menuItems = XmlParser.instance().userInfoXmlParsing(ssAnswer.getAnswer());
+		} catch (Exception e) {
+			Window.alert("Application encountered a problem contacting StreamSpin\nPlease reload the application\n\n"
+							+ "If the problem persist StreamSpin may be down for maintenance\n\n"
+							+ e.toString());
+		}
+
+		MenuBar debugMenu = new MenuBar(true);
+		debugMenu.addItem("On", ni);
+		debugMenu.addItem("Off", ni);
+
+		MenuBar setLocationMenu = new MenuBar(true);
+		setLocationMenu.addItem("Use GPS", cmd); // Not needed in web-client, but it seems so assuring to have under the location menu
+		if(menuItems.getLocations().isEmpty())
+		{
+			setLocationMenu.addItem("No Predefined Locations",cmd);
+		}
+		for(Location loc: menuItems.getLocations())
+		{
+		setLocationMenu.addItem(loc.getName(), new setLocation(loc.getLongtitude(), loc.getLatitude()));
+		}
+		
+		MenuBar startServiceMenu = new MenuBar(true);
+		if(menuItems.getStartService().isEmpty())
+		{
+			startServiceMenu.addItem("No Service Subscriptions found",cmd);
+		}
+		for(StartService sService: menuItems.getStartService())
+		{
+			startServiceMenu.addItem(sService.getName(),new startService(sService.getServiceID(),sService.getStartURL()));
+		}
+
+		MenuBar setProfileMenu = new MenuBar(true);
+		if(menuItems.getProfile().isEmpty())
+		{
+			setProfileMenu.addItem("No Interests Profiles found",cmd);
+		}
+		for(Profile p: menuItems.getProfile())
+		{
+			setProfileMenu.addItem(p.getName(), new setProfile(p.getID()));
+		}
+
+		MenuBar menuMenu = new MenuBar(true);
+		menuMenu.addItem("Enable debug Mode", debugMenu);
+		menuMenu.addItem("Exit", ni);
+		menuMenu.addItem("Write Message", writeMessage);
+
+		menuMenu.addItem("Set Location", setLocationMenu);
+		menuMenu.addItem("Start Service", startServiceMenu);
+		menuMenu.addItem("Set Profile", setProfileMenu);
+
+		// the main menu
+		mainLeftMenu.addItem("Menu", menuMenu);
+		mainLeftMenu.setAutoOpen(false);
+		mainLeftMenu.setWidth("65px");
+	}
+	
+	// TODO add correct event at button press
+	protected void makeMainRightButton() {
+		mainRightButton.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				// testConnection();
+				mainBottomWindowTextArea.setText(ssAnswer.getAnswer());
+			}
+		});
+		mainRightButton.getElement().setInnerText("Send Message");
+		mainRightButton.setTitle("You can send messages to your friends with this");
+	}
+
+	protected void makeMainMenu() {
+		makeMainLeftMenu();
+		makeMainRightButton();
+		makeWindowTitle("title of Main Window");
+
+		mainMenuPanel.add(mainLeftMenu);
+		mainMenuPanel.add(titleBar);
+		mainMenuPanel.add(mainRightButton);
+		mainMenuPanel.setCellHorizontalAlignment(mainLeftMenu,HasHorizontalAlignment.ALIGN_LEFT);
+		mainMenuPanel.setCellHorizontalAlignment(titleBar,HasHorizontalAlignment.ALIGN_CENTER);
+		mainMenuPanel.setCellHorizontalAlignment(mainRightButton,HasHorizontalAlignment.ALIGN_RIGHT);
+		mainMenuPanel.setWidth("100%");
+	}
+
+	protected void makeMainWindowPanel() {
+		mainTopWindowListBox.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				final ContentPopup con = new ContentPopup(mainTopWindowListBox.getValue(mainTopWindowListBox.getSelectedIndex()));
+				con.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						int left = (Window.getClientWidth() - offsetWidth);
+						int right = (Window.getClientHeight() - offsetHeight);
+						con.setPopupPosition(left, right);
+					}
+				});
+			}
+		});
+
+		mainTopWindowListBox.setVisibleItemCount(5);
+		mainTopWindowListBox.setWidth("100%");
+
+		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
+		mainBottomWindowTextArea.setReadOnly(true);
+		mainBottomWindowTextArea.setWidth("100%");
+		mainBottomWindowTextArea.setHeight("150px");
+
+		mainWindowPanel.add(mainTopWindowListBox);
+		mainWindowPanel.add(mainBottomWindowTextArea);
+		mainWindowPanel.setHeight("100px");
+		mainWindowPanel.setWidth("100%");
+	}
+
+	
+	protected void mainTopWindowListBoxContent()
+	{
+		
+		Timer timer = new Timer() {
+			public void run() {
+				AnswerWrapper ans = new AnswerWrapper();
+				new StreamSpinContact().contactStreamSpin(2, ans, "uid="+UID);
+				new mainTopWindowListBoxContentupdate(ans).run();
+			}
+		};
+		
+		timer.scheduleRepeating(5000);
+	}
+	
+	private class mainTopWindowListBoxContentupdate
+	{
+		private final AnswerWrapper answer;
+		
+		public mainTopWindowListBoxContentupdate(AnswerWrapper answer) 
+		{
+			this.answer = answer;
+		}
+		
+		Timer timer = new Timer() {
+			public void run() {
+				if(answer.getAnswer()!=null)
+				{
+					ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
+					for(Content cont: content)
+					{
+						mainTopWindowListBox.addItem(cont.getHeadline(), cont.getContent());
+					}
+				}
+				cancel();
+			}
+		};
+		
+		public void run()
+		{
+		timer.scheduleRepeating(2000);
+		}
+	}
+
+	protected void showLogin() {
+		makeWindowTitle("Login Screen");
+
+		loginButton.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				loginFunc(loginUnTextBox.getText(), loginPwTextBox.getText());
+			}
+		});
+		loginButton.getElement().setInnerHTML("<b>Login</b>");
+
+		loginPanel.add(titleBar);
+		loginPanel.add(loginUnTextBox);
+		loginPanel.add(loginPwTextBox);
+		loginPanel.add(loginButton);
+
+		RootPanel.get().add(loginPanel);
+	}
+
+	// TODO add correct event at button press
+	protected void loginFunc(String un, String pw) {
+		loginButton.getElement().setInnerText("un: " + un + ", pw: " + pw);
+	}
+
+	private class startUpLoadingScreen extends PopupPanel {
+
+		public startUpLoadingScreen() {
+			super(false);
+			this.show();
+			final startUpLoadingScreen self = this;
+
+			HTML cc = new HTML();
+			cc.setHTML("</br><center><font size=\"6\" face=\"Times\" color=\"Green\">" +
+					"Loading...</font></br></br></br>" +
+					"<img border=\"0\" src=\""+GWT.getModuleBaseURL() + "images/ajax-loader.gif\" /> " +
+							"</center>");//width=\"304\" height=\"228\"
+			cc.setSize("" + Window.getClientWidth() * 0.95, ""+ Window.getClientHeight() * 0.9);
+//			cc.addClickListener(new ClickListener() {
+//				public void onClick(Widget sender) {
+//					self.hide();
+//				}
+//			});
+			setWidget(cc);
+
+			final Timer timer = new Timer() {
+				public void run() {
+					Window.alert("2: "+ssAnswer.getAnswer());
+					if(ssAnswer.getAnswer()!=null){
+						t.cancel();
+						makeMain();	
+						self.hide();
+					}
+				}
+			};
+			
+			t = new Timer() {
+				public void run(){
+					Window.alert("1: "+ssAnswer.getAnswer());
+					if(ssAnswer.getAnswer()!=null){
+						timer.schedule(100);
+					}
+				}
+			};
+			
+			t.scheduleRepeating(3000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
+		}
+	}
 }
+
+
