@@ -210,7 +210,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainLeftMenu() {
 		
 		UserInfo menuItems = null;
-		Window.alert(ssAnswer.getAnswer());
+		Window.alert("3 "+ssAnswer.getAnswer());
 		try{
 			menuItems = XmlParser.instance().userInfoXmlParsing(ssAnswer.getAnswer());
 		} catch (Exception e) {
