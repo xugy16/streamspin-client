@@ -62,8 +62,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	public static String USERNAME = null;
 	public static String PASSWORD = null;
 	
-
-	
 	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
     AnswerWrapper ssAnswer = new AnswerWrapper();
 
@@ -212,6 +210,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainLeftMenu() {
 		
 		UserInfo menuItems = null;
+		Window.alert(ssAnswer.getAnswer());
 		try{
 			menuItems = XmlParser.instance().userInfoXmlParsing(ssAnswer.getAnswer());
 		} catch (Exception e) {
