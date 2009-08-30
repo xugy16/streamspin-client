@@ -59,8 +59,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
 	private Timer t;
 	public static int UID = -1;
-	public static String USERNAME = null;
-	public static String PASSWORD = null;
+	public static String USERNAME = "jeppe";
+	public static String PASSWORD = "jeppejeppe";
 	
 	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
     AnswerWrapper ssAnswer = new AnswerWrapper();
