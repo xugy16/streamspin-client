@@ -415,7 +415,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				public void run() {
 					Window.alert("2: "+ssAnswer.getAnswer());
 					if(ssAnswer.getAnswer()!=null){
-						t.cancel();
+						cancel();
 						makeMain();	
 						self.hide();
 					}
@@ -431,7 +431,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				}
 			};
 			
-			t.scheduleRepeating(5000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
+			timer.scheduleRepeating(5000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
 		}
 	}
 }
