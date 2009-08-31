@@ -305,16 +305,16 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		});
 
-		mainTopWindowListBox.setVisibleItemCount(5);
+		mainTopWindowListBox.setVisibleItemCount(15);
 		mainTopWindowListBox.setWidth("100%");
 
-		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
-		mainBottomWindowTextArea.setReadOnly(true);
-		mainBottomWindowTextArea.setWidth("100%");
-		mainBottomWindowTextArea.setHeight("150px");
-
-		mainWindowPanel.add(mainTopWindowListBox);
-		mainWindowPanel.add(mainBottomWindowTextArea);
+//		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
+//		mainBottomWindowTextArea.setReadOnly(true);
+//		mainBottomWindowTextArea.setWidth("100%");
+//		mainBottomWindowTextArea.setHeight("150px");
+//
+//		mainWindowPanel.add(mainTopWindowListBox);
+//		mainWindowPanel.add(mainBottomWindowTextArea);
 		mainWindowPanel.setHeight("100px");
 		mainWindowPanel.setWidth("100%");
 	}
