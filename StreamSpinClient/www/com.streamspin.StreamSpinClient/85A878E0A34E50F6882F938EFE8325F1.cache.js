@@ -619,7 +619,7 @@ function BY(){}
 _=BY.prototype=new v5();_.gC=EY;_.wb=FY;_.tI=0;_.a=null;function gZ(){gZ=uab;zE()}
 function fZ(b,a){gZ();b.a=a;return b}
 function hZ(){return hA}
-function iZ(){var a;++this.a.p;a=new nW();v1(s1(new g1()),2,a);BE(vZ(new oZ(),a,this.a).c,2000)}
+function iZ(){var a;++this.a.p;a=new nW();v1(s1(new g1()),2,a);BE(vZ(new oZ(),a,this.a).c,500)}
 function eZ(){}
 _=eZ.prototype=new sE();_.gC=hZ;_.ub=iZ;_.tI=81;_.a=null;function kZ(b,a){b.a=a;return b}
 function mZ(){return iA}
