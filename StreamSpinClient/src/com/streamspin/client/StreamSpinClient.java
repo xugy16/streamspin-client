@@ -18,7 +18,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -29,8 +28,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-
-
 
 
 /**
@@ -293,6 +290,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	}
 
 	protected void makeMainWindowPanel() {
+		mainTopWindowListBoxContent();
 		mainTopWindowListBox.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				final ContentPopup con = new ContentPopup(mainTopWindowListBox.getValue(mainTopWindowListBox.getSelectedIndex()));
@@ -367,41 +365,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void showLogin() {
 		makeWindowTitle("Login Screen");
 
-		loginButton.addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
-				loginFunc(loginUnTextBox.getText(), loginPwTextBox.getText());
-			}
-		});
-		
 		loginButton.getElement().setInnerHTML("<b>Login</b>");
 		loginButton.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				if (loginUnTextBox.getText().length() > 0 && loginPwTextBox.getText().length() > 0) {
-					StreamSpinClient.USERNAME = loginUnTextBox.getText();
-					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
-					RootPanel.get().remove(loginPanel);
-					new StreamSpinContact().contactStreamSpin(8, ssAnswer);
-					new startUpLoadingScreen();
-				}
-				else Window.alert("Both username and password has to be filled out");
-			}
-		});
-		
-		loginButton.addKeyboardListener(new KeyboardListener()
-		{
-			public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public void onKeyPress(Widget sender, char keyCode, int modifiers) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-				if(keyCode == KEY_ENTER)
-				{
 					StreamSpinClient.USERNAME = loginUnTextBox.getText();
 					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
 					RootPanel.get().remove(loginPanel);
@@ -418,8 +385,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		loginPanel.add(loginButton);
 
 		RootPanel.get().add(loginPanel);
-		
-
 	}
 
 	// TODO add correct event at button press

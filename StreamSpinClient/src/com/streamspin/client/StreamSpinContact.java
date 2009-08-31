@@ -35,7 +35,8 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 	private void contactStreamSpinAsync(int requestType, String ... args) {
 		if(intrinsics == null) Window.alert("a problem.. the google url-translation feature has failed..");
 		
-		String url = "http://webclient.streamspin.com/Default.aspx?type="+requestType+"&un="+StreamSpinClient.USERNAME+"&pw="+StreamSpinClient.PASSWORD;
+		String url = "http://webclient.streamspin.com/Default.aspx?type="+
+		requestType+"&un="+StreamSpinClient.USERNAME+"&pw="+StreamSpinClient.PASSWORD+"&uid"+StreamSpinClient.UID;
 		//String altUrl = "http://streamspin-client.googlecode.com/svn/trunk/StreamSpinClient/www/com.streamspin.StreamSpinClient/content.xml";
 		try {
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {

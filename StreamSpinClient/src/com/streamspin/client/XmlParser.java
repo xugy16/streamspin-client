@@ -69,6 +69,7 @@ public class XmlParser {
 			Element root = xmlDoc.getDocumentElement();
 
 			usrInfo.setUid(Integer.parseInt(root.getAttribute("uid")));
+			StreamSpinClient.UID = usrInfo.getUid();
 
 			int numLocations = root.getElementsByTagName("locations").item(0).getChildNodes().getLength();
 			NodeList location;
