@@ -400,7 +400,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 
 			public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-				if((keyCode == KEY_ENTER) && (modifiers == 0))
+				if(keyCode == KEY_ENTER)
 				{
 					StreamSpinClient.USERNAME = loginUnTextBox.getText();
 					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
