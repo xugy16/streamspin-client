@@ -378,7 +378,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				if (loginUnTextBox.getText().length() > 0 && loginPwTextBox.getText().length() > 0) {
 					StreamSpinClient.USERNAME = loginUnTextBox.getText();
 					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
-					
+					RootPanel.get().remove(loginPanel);
 					new StreamSpinContact().contactStreamSpin(8, ssAnswer);
 					new startUpLoadingScreen();
 				}
