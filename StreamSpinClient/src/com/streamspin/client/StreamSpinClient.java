@@ -332,7 +332,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		};
 		
-		timer.scheduleRepeating(10000);
+		timer.scheduleRepeating(5000);
 	}
 	
 	private class mainTopWindowListBoxContentupdate
@@ -354,6 +354,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 						for (Content cont : content) {
 							mainTopWindowListBox.addItem(cont.getHeadline(),cont.getContent());
 						}
+//						answer.setAnswer("");
 					}
 				}
 			}
@@ -361,7 +362,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		public void run()
 		{
-		timer.scheduleRepeating(2000);
+		timer.scheduleRepeating(100);
 		}
 	}
 
