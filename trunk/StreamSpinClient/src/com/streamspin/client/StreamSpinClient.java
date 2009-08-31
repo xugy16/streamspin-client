@@ -361,7 +361,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		public void run()
 		{
-		timer.scheduleRepeating(2000);
+		timer.scheduleRepeating(500);
 		}
 	}
 

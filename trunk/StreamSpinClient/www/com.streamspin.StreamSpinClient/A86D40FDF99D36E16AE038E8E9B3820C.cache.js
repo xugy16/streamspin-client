@@ -651,7 +651,7 @@ function EZ(){}
 _=EZ.prototype=new y6();_.gC=b0;_.xb=c0;_.tI=0;_.a=null;function j0(){j0=xbb;dF()}
 function i0(b,a){j0();b.a=a;return b}
 function k0(){return rA}
-function l0(){var a;++this.a.p;a=new qX();y2(v2(new j2()),2,a);fF(y0(new r0(),a,this.a).c,2000)}
+function l0(){var a;++this.a.p;a=new qX();y2(v2(new j2()),2,a);fF(y0(new r0(),a,this.a).c,500)}
 function h0(){}
 _=h0.prototype=new CE();_.gC=k0;_.vb=l0;_.tI=81;_.a=null;function n0(b,a){b.a=a;return b}
 function p0(){return sA}

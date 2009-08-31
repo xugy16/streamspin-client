@@ -662,7 +662,7 @@ function s0(){}
 _=s0.prototype=new m7();_.gC=v0;_.zb=w0;_.tI=0;_.a=null;function D0(){D0=lcb;oF()}
 function C0(b,a){D0();b.a=a;return b}
 function E0(){return DA}
-function F0(){var a;++this.a.p;a=new eY();m3(j3(new D2()),2,a);qF(m1(new f1(),a,this.a).c,2000)}
+function F0(){var a;++this.a.p;a=new eY();m3(j3(new D2()),2,a);qF(m1(new f1(),a,this.a).c,500)}
 function B0(){}
 _=B0.prototype=new hF();_.gC=E0;_.xb=F0;_.tI=82;_.a=null;function b1(b,a){b.a=a;return b}
 function d1(){return EA}
