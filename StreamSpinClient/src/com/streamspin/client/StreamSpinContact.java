@@ -18,11 +18,9 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 	contactStreamSpinAsync(requestType, args);
 	
 	final AnswerWrapper ans = answer;
-	Window.alert("contactStreamSpin BF timer\n"+ans.getAnswer()+"\n"+answer.getAnswer()); 
 	Timer timer = new Timer() {
 		public void run() {
 			if(xml!=null){
-				Window.alert("contactStreamSpin IN timer\n"+ans.getAnswer()+"\n");
 				ans.setAnswer(xml);
 				Window.alert("contactStreamSpin AS timer\n"+ans.getAnswer()+"\n");
 				xml = null;
@@ -31,13 +29,13 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 		}
 	};
 	
-	timer.scheduleRepeating(200);
+	timer.scheduleRepeating(1000);
 }
 
 	
 	private void contactStreamSpinAsync(int requestType, String ... args) {
 		if(intrinsics == null) Window.alert("a problem.. the google url-translation feature has failed..");
-		Window.alert("contactStreamSpinAsync "+xml);
+		//Window.alert("contactStreamSpinAsync "+xml);
 		String url = "http://webclient.streamspin.com/Default.aspx?type="+
 		requestType+"&un="+StreamSpinClient.USERNAME+"&pw="+StreamSpinClient.PASSWORD+"&uid="+StreamSpinClient.UID;
 		//String altUrl = "http://streamspin-client.googlecode.com/svn/trunk/StreamSpinClient/www/com.streamspin.StreamSpinClient/content.xml";

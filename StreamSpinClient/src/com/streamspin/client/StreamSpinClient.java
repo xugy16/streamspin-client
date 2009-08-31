@@ -333,7 +333,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		};
 		
-		timer.scheduleRepeating(15000);
+		timer.scheduleRepeating(10000);
 	}
 	
 	private class mainTopWindowListBoxContentupdate
@@ -349,7 +349,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			public void run() {
 				if (answer.getAnswer() != null) {
 					cancel();
-					Window.alert("Check"+test+"\n"+answer.getAnswer());
+					//Window.alert("Check"+test+"\n"+answer.getAnswer());
 					mainTopWindowListBox.addItem("Check"+test,answer.getAnswer());
 					if (!answer.getAnswer().isEmpty()) {
 						ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
@@ -365,7 +365,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		public void run()
 		{
-		timer.scheduleRepeating(20);
+		timer.scheduleRepeating(500);
 		}
 	}
 
