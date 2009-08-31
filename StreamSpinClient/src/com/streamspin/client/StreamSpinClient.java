@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -386,6 +387,31 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		});
 		
+		loginButton.addKeyboardListener(new KeyboardListener()
+		{
+			public void onKeyDown(Widget sender, char keyCode, int modifiers) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void onKeyPress(Widget sender, char keyCode, int modifiers) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void onKeyUp(Widget sender, char keyCode, int modifiers) {
+				if((keyCode == KEY_ENTER) && (modifiers == 0))
+				{
+					StreamSpinClient.USERNAME = loginUnTextBox.getText();
+					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
+					RootPanel.get().remove(loginPanel);
+					new StreamSpinContact().contactStreamSpin(8, ssAnswer);
+					new startUpLoadingScreen();
+				}
+				else Window.alert("Both username and password has to be filled out");
+			}
+		});
+		
 		loginPanel.add(titleBar);
 		loginPanel.add(loginUnTextBox);
 		loginPanel.add(loginPwTextBox);
@@ -414,11 +440,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 					"<img border=\"0\" src=\""+GWT.getModuleBaseURL() + "images/ajax-loader.gif\" /> " +
 							"</center>");
 			cc.setSize("" + Window.getClientWidth() * 0.95, ""+ Window.getClientHeight() * 0.9);
-//			cc.addClickListener(new ClickListener() {
-//				public void onClick(Widget sender) {
-//					self.hide();
-//				}
-//			});
 			setWidget(cc);
 
 			final Timer timer = new Timer() {
