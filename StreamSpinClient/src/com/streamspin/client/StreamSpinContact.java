@@ -22,7 +22,7 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 		public void run() {
 			if(xml!=null){
 				ans.setAnswer(xml);
-				Window.alert("contactStreamSpin AS timer\n"+ans.getAnswer()+"\n");
+				//Window.alert("contactStreamSpin AS timer\n"+ans.getAnswer()+"\n");
 				xml = null;
 				cancel();
 			}	
