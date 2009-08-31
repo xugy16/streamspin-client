@@ -305,7 +305,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		});
 
-		mainTopWindowListBox.setVisibleItemCount(15);
+		mainTopWindowListBox.setVisibleItemCount(35);
 		mainTopWindowListBox.setWidth("100%");
 
 //		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
@@ -355,6 +355,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 							mainTopWindowListBox.addItem(cont.getHeadline(),cont.getContent());
 						}
 //						answer.setAnswer("");
+						cancel();
 					}
 				}
 			}
@@ -362,7 +363,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		public void run()
 		{
-		timer.scheduleRepeating(100);
+		timer.scheduleRepeating(1000);
 		}
 	}
 
