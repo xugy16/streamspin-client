@@ -23,8 +23,8 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 		public void run() {
 			if(xml!=null){
 				ans.setAnswer(xml);
-				cancel();
 				xml = null;
+				cancel();
 			}	
 		}
 	};
