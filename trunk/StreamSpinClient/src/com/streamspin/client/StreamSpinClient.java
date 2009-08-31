@@ -346,7 +346,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			public void run() {
 				if(answer.getAnswer()!=null)
 				{
-					Window.alert("!_! \n"answer.getAnswer());
+					Window.alert("!_!\n"+answer.getAnswer());
 					ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
 					for(Content cont: content)
 					{
