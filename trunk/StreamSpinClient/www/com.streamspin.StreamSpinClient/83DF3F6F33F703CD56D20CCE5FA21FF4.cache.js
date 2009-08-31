@@ -632,7 +632,7 @@ function dZ(){}
 _=dZ.prototype=new D5();_.gC=gZ;_.wb=hZ;_.tI=0;_.a=null;function oZ(){oZ=Cab;zE()}
 function nZ(b,a){oZ();b.a=a;return b}
 function pZ(){return iA}
-function qZ(){var a;++this.a.p;a=new vW();D1(A1(new o1()),2,a);BE(DZ(new wZ(),a,this.a).c,1000)}
+function qZ(){var a;++this.a.p;a=new vW();D1(A1(new o1()),2,a);BE(DZ(new wZ(),a,this.a).c,20)}
 function mZ(){}
 _=mZ.prototype=new sE();_.gC=pZ;_.ub=qZ;_.tI=82;_.a=null;function sZ(b,a){b.a=a;return b}
 function uZ(){return jA}
