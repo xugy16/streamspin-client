@@ -344,6 +344,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		Timer timer = new Timer() {
 			public void run() {
+				cancel();
 				Window.alert("!_!\n"+answer.getAnswer());
 				if(answer.getAnswer()!=null && !answer.getAnswer().isEmpty())
 				{
@@ -353,7 +354,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 						mainTopWindowListBox.addItem(cont.getHeadline(), cont.getContent());
 					}
 				}
-				cancel();
 			}
 		};
 		
