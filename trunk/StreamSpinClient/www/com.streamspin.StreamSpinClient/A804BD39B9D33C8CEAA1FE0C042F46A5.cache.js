@@ -659,7 +659,7 @@ function n2(){}
 _=n2.prototype=new C6();_.gC=D2;_.tI=0;_.b=null;function q2(){q2=Dbb;CF()}
 function p2(b,a,c){q2();b.a=a;b.b=c;return b}
 function r2(){return BB}
-function s2(){if(this.a.b!=null){this.b.a=this.a.b;BF(this)}}
+function s2(){if(this.a.b!=null){this.b.a=this.a.b;BF(this);this.a.b=null}}
 function o2(){}
 _=o2.prototype=new vF();_.gC=r2;_.vb=s2;_.tI=89;_.a=null;_.b=null;function u2(b,a){b.a=a;return b}
 function x2(){return CB}
