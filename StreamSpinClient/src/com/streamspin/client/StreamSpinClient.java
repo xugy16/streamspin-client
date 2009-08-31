@@ -76,7 +76,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	@Override
 	protected void init(UserPreferences preferences) {
-
+		showLogin();
 	}
 
 	public void initializeFeature(DynamicHeightFeature heightFeature) {
