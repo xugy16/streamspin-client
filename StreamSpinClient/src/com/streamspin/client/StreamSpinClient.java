@@ -327,6 +327,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			public void run() {
 				test++;
 				AnswerWrapper ans = new AnswerWrapper();
+				ans.setAnswer("");
 				new StreamSpinContact().contactStreamSpin(2, ans, "uid="+UID);
 				new mainTopWindowListBoxContentupdate(ans, test).run();
 			}
