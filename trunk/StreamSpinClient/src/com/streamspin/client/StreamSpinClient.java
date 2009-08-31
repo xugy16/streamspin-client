@@ -333,7 +333,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		};
 		
-		timer.scheduleRepeating(10000);
+		timer.scheduleRepeating(25000);
 	}
 	
 	private class mainTopWindowListBoxContentupdate

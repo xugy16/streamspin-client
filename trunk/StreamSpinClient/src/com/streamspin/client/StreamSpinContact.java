@@ -43,9 +43,8 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(ContentFetchedHandler.ContentFetchedEvent event) {					
 					xml = event.getFetchedContent();
-					Window.alert("contactStreamSpinAsync\n"+xml);
 				}
-			}, 1);
+			}, 10);
 		} catch (Exception e) {
 			Window.alert("Damn!!\nAn Exception getting content from streamspin..\n\n"+ e.toString());
 		}	
