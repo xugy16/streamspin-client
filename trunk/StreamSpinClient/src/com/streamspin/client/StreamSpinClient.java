@@ -354,8 +354,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 						for (Content cont : content) {
 							mainTopWindowListBox.addItem(cont.getHeadline(),cont.getContent());
 						}
-//						answer.setAnswer("");
-						cancel();
+						answer.setAnswer("");
+
 					}
 				}
 			}
