@@ -43,6 +43,7 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(ContentFetchedHandler.ContentFetchedEvent event) {					
 					xml = event.getFetchedContent();
+					Window.alert("contactStreamSpinAsync\n"+xml);
 				}
 			}, 10);
 		} catch (Exception e) {
