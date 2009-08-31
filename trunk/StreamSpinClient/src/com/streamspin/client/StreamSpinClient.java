@@ -57,7 +57,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
 	private Button loginButton = new Button();
 	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
-	private Timer t;
 	public static int UID = -1;
 	public static String USERNAME = "jeppe";
 	public static String PASSWORD = "jeppejeppe";
@@ -77,10 +76,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	@Override
 	protected void init(UserPreferences preferences) {
-		//StreamSpinContact.instance().contactStreamSpin(8, ssAnswer);
-		new StreamSpinContact().contactStreamSpin(8, ssAnswer);
-		new startUpLoadingScreen();
-		// showLogin();
+
 	}
 
 	public void initializeFeature(DynamicHeightFeature heightFeature) {
@@ -95,7 +91,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		return intrinsics;
 	}
 	
-	//Used for empty menu items, where not meant to be presseed
+	//Used for empty menu items, not meant to be choosen
 	Command cmd = new Command() {
 		public void execute() {}
 	};
@@ -375,14 +371,29 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				loginFunc(loginUnTextBox.getText(), loginPwTextBox.getText());
 			}
 		});
+		
 		loginButton.getElement().setInnerHTML("<b>Login</b>");
-
+		loginButton.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				if (loginUnTextBox.getText().length() > 0 && loginPwTextBox.getText().length() > 0) {
+					StreamSpinClient.USERNAME = loginUnTextBox.getText();
+					StreamSpinClient.PASSWORD = loginPwTextBox.getText();
+					
+					new StreamSpinContact().contactStreamSpin(8, ssAnswer);
+					new startUpLoadingScreen();
+				}
+				else Window.alert("Both username and password has to be filled out");
+			}
+		});
+		
 		loginPanel.add(titleBar);
 		loginPanel.add(loginUnTextBox);
 		loginPanel.add(loginPwTextBox);
 		loginPanel.add(loginButton);
 
 		RootPanel.get().add(loginPanel);
+		
+
 	}
 
 	// TODO add correct event at button press
