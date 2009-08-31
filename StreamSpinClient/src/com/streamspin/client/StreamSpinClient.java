@@ -346,8 +346,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		Timer timer = new Timer() {
 			public void run() {
-				Window.alert(test + "\n" + answer.getAnswer());
 				if (answer.getAnswer() != null) {
+					Window.alert(test + "\n" + answer.getAnswer());
 					cancel();
 					if (!answer.getAnswer().isEmpty()) {
 						ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
