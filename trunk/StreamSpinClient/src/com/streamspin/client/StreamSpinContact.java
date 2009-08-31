@@ -45,7 +45,7 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 					xml = event.getFetchedContent();
 					Window.alert("contactStreamSpinAsync\n"+xml);
 				}
-			}, 10);
+			}, 1);
 		} catch (Exception e) {
 			Window.alert("Damn!!\nAn Exception getting content from streamspin..\n\n"+ e.toString());
 		}	
