@@ -313,7 +313,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 //		mainBottomWindowTextArea.setWidth("100%");
 //		mainBottomWindowTextArea.setHeight("150px");
 //
-//		mainWindowPanel.add(mainTopWindowListBox);
+		mainWindowPanel.add(mainTopWindowListBox);
 //		mainWindowPanel.add(mainBottomWindowTextArea);
 		mainWindowPanel.setHeight("100px");
 		mainWindowPanel.setWidth("100%");
