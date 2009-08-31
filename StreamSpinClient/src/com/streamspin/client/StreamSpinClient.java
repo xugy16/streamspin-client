@@ -59,6 +59,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	public static String USERNAME = "jeppe";
 	public static String PASSWORD = "jeppejeppe";
 	
+	int test = 0;
 	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
     AnswerWrapper ssAnswer = new AnswerWrapper();
 
@@ -324,9 +325,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		Timer timer = new Timer() {
 			public void run() {
+				test++;
 				AnswerWrapper ans = new AnswerWrapper();
 				new StreamSpinContact().contactStreamSpin(2, ans, "uid="+UID);
-				new mainTopWindowListBoxContentupdate(ans).run();
+				new mainTopWindowListBoxContentupdate(ans, test).run();
 			}
 		};
 		
@@ -337,21 +339,21 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	{
 		private final AnswerWrapper answer;
 		
-		public mainTopWindowListBoxContentupdate(AnswerWrapper answer) 
+		public mainTopWindowListBoxContentupdate(AnswerWrapper answer, int test) 
 		{
 			this.answer = answer;
 		}
 		
 		Timer timer = new Timer() {
 			public void run() {
-				cancel();
-				Window.alert("!_!\n"+answer.getAnswer());
-				if(answer.getAnswer()!=null && !answer.getAnswer().isEmpty())
-				{
-					ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
-					for(Content cont: content)
-					{
-						mainTopWindowListBox.addItem(cont.getHeadline(), cont.getContent());
+				Window.alert(test + "\n" + answer.getAnswer());
+				if (answer.getAnswer() != null) {
+					cancel();
+					if (!answer.getAnswer().isEmpty()) {
+						ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
+						for (Content cont : content) {
+							mainTopWindowListBox.addItem(cont.getHeadline(),cont.getContent());
+						}
 					}
 				}
 			}
