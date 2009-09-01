@@ -93,7 +93,7 @@ public class UserMessage extends PopupPanel{
 //		onlineFriendsListBox.addItem("funny");
 //		onlineFriendsListBox.addItem("stuff");
 		
-		
+		Window.alert(friendsXml);
 		try{
 			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
 		} catch (Exception e) {
@@ -116,7 +116,7 @@ public class UserMessage extends PopupPanel{
 				String msg = "Selected items: ";
 	    	    for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
 	    	      if (onlineFriendsListBox.isItemSelected(i)) {
-	    	        msg += onlineFriendsListBox.getItemText(i) + " " + onlineFriendsListBox.getValue(i)+"\n";
+	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n " + onlineFriendsListBox.getValue(i)+"\n";
 	    	      }
 	    	    }
 				Window.alert(msg);		
@@ -125,7 +125,7 @@ public class UserMessage extends PopupPanel{
 		});
 		
 		messageTextArea.setSize("100%", "210px");
-		rightBottomPanel.setSize("100%", "50%");
+		rightBottomPanel.setSize("100%", "40px");
 		mainPanel.setSize("100%", "100%");
 
 		
