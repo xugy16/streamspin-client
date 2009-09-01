@@ -617,7 +617,7 @@ function DY(b){var a;a=DW(new xW(),aL(this.a.l,this.a.l.x.selectedIndex));tO(a,w
 function uY(){}
 _=uY.prototype=new p5();_.gC=CY;_.mb=DY;_.tI=79;_.a=null;function wY(a,b){a.a=b;return a}
 function yY(){return cA}
-function zY(c,b){var a,d;a=(pG(),rG).clientWidth-~~(c/2);d=rG.clientHeight-~~(b/2);uO(this.a,a,d)}
+function zY(c,b){var a,d;a=~~((pG(),rG).clientWidth/2)-c;d=~~(rG.clientHeight/2)-b;uO(this.a,a,d)}
 function vY(){}
 _=vY.prototype=new p5();_.gC=yY;_.wb=zY;_.tI=0;_.a=null;function aZ(){aZ=oab;vE()}
 function FY(b,a){aZ();b.a=a;return b}
