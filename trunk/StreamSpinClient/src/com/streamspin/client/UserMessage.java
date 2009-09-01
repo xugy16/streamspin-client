@@ -127,7 +127,6 @@ public class UserMessage extends PopupPanel{
 				if(answer.getAnswer()!=null){
 					cancel();
 					Window.alert("the Msg Ans: "+answer.getAnswer());
-
 				}
 			}
 		};
