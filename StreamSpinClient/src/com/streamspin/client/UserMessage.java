@@ -94,10 +94,12 @@ public class UserMessage extends PopupPanel{
 //		onlineFriendsListBox.addItem("stuff");
 		
 		Window.alert(friendsXml);
-		try{
-			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
-		} catch (Exception e) {
-			Window.alert("An Error occurred while retrieving and parsing the list of your friends\n\n"+e.toString());	
+		if (!friendsXml.isEmpty()) {
+			try {
+				friendList = XmlParser.instance().friendXmlParsing(friendsXml);
+			} catch (Exception e) {
+				Window.alert("An Error occurred while retrieving and parsing the list of your friends\n\n"+ e.toString());
+			}
 		}
 		
 		if(friendList.isEmpty())
