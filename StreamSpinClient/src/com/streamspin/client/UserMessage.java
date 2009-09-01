@@ -77,6 +77,12 @@ public class UserMessage extends PopupPanel{
 			}
 		});
 		
+		cancelButton.addClickListener(new ClickListener(){
+			public void onClick(Widget sender) {
+				self.hide();
+			}
+		});
+		
 		//Window.alert("friendXml\n"+friendsXml);
 		if (!friendsXml.isEmpty()) {
 			try {

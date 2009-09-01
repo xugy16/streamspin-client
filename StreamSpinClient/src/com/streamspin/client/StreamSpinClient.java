@@ -55,6 +55,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
 	private Button loginButton = new Button();
 	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
+	private int CLIENT_ROW_HEIGHT = 20;
 	public static int UID = -1;
 	public static String USERNAME = "jeppe";
 	public static String PASSWORD = "jeppejeppe";
@@ -304,7 +305,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		});
 
-		mainTopWindowListBox.setVisibleItemCount(35);
+		mainTopWindowListBox.setVisibleItemCount(CLIENT_ROW_HEIGHT);
 		mainTopWindowListBox.setWidth("100%");
 
 //		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
