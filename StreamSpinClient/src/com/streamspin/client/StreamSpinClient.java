@@ -279,7 +279,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
 		makeMainRightButton();
-		makeWindowTitle("title of Main Window");
+		makeWindowTitle(USERNAME+"@StreamSpin");
 
 		mainMenuPanel.add(mainLeftMenu);
 		mainMenuPanel.add(titleBar);

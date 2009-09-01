@@ -93,7 +93,7 @@ public class UserMessage extends PopupPanel{
 //		onlineFriendsListBox.addItem("funny");
 //		onlineFriendsListBox.addItem("stuff");
 		
-		Window.alert(friendsXml);
+		Window.alert("friendXml\n"+friendsXml);
 		if (!friendsXml.isEmpty()) {
 			try {
 				friendList = XmlParser.instance().friendXmlParsing(friendsXml);
@@ -103,12 +103,12 @@ public class UserMessage extends PopupPanel{
 		}
 		
 		if(friendList.isEmpty())
-			onlineFriendsListBox.addItem("Empty Friend List",
-					"No Friends have been retrieved from StreamSpin");
+			onlineFriendsListBox.addItem("Empty Friend List","No Friends have been retrieved from StreamSpin");
 		else 
 		{
 			for (Friend friend : friendList) {
 				onlineFriendsListBox.addItem(friend.getName(), ""+ friend.getId());
+				//onlineFriendsListBox.
 			}
 		}
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
@@ -126,8 +126,8 @@ public class UserMessage extends PopupPanel{
 			
 		});
 		
-		messageTextArea.setSize("100%", ""+((Window.getClientHeight()*0.8)-40));
-		rightBottomPanel.setSize("100%", "40px");
+		messageTextArea.setSize("100%", ""+((Window.getClientHeight()*0.8)-30));
+		rightBottomPanel.setSize("100%", "30px");
 		mainPanel.setSize("100%", "100%");
 
 		
