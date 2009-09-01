@@ -636,7 +636,7 @@ function uZ(b){var a;a=uX(new oX(),kL(this.a.l,this.a.l.x.selectedIndex));CO(a,n
 function lZ(){}
 _=lZ.prototype=new g6();_.gC=tZ;_.nb=uZ;_.tI=78;_.a=null;function nZ(a,b){a.a=b;return a}
 function pZ(){return hA}
-function qZ(c,b){var a,d;a=(uG(),vG).clientWidth-~~(c/2);d=($wnd.devicePixelRatio?vG.clientHeight:$wnd.innerHeight)-~~(b/2);DO(this.a,a,d)}
+function qZ(c,b){var a,d;a=~~((uG(),vG).clientWidth/2)-c;d=~~(($wnd.devicePixelRatio?vG.clientHeight:$wnd.innerHeight)/2)-b;DO(this.a,a,d)}
 function mZ(){}
 _=mZ.prototype=new g6();_.gC=pZ;_.xb=qZ;_.tI=0;_.a=null;function xZ(){xZ=fbb;BE()}
 function wZ(b,a){xZ();b.a=a;return b}
