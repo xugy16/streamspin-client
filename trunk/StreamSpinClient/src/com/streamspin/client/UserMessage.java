@@ -39,7 +39,7 @@ public class UserMessage extends PopupPanel{
 	{
 		answer = new AnswerWrapper();
 		
-		new StreamSpinContact().contactStreamSpin(5, answer);
+		new StreamSpinContact().contactStreamSpin(6, answer);
 		final Timer timer = new Timer() {
 			public void run() {
 				if(answer.getAnswer()!=null){
@@ -111,6 +111,7 @@ public class UserMessage extends PopupPanel{
 				//onlineFriendsListBox.
 			}
 		}
+		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
 		onlineFriendsListBox.setVisibleItemCount(14);
 		onlineFriendsListBox.addChangeListener(new ChangeListener(){
