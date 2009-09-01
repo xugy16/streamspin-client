@@ -45,7 +45,7 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 		String url = "http://webclient.streamspin.com/Default.aspx?type="+requestType
 		+"&un="+StreamSpinClient.USERNAME+"&pw="+StreamSpinClient.PASSWORD+arg;
 		//String altUrl = "http://streamspin-client.googlecode.com/svn/trunk/StreamSpinClient/www/com.streamspin.StreamSpinClient/content.xml";
-		Window.alert("url "+url);
+		//Window.alert("url "+url);
 		try {
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(ContentFetchedHandler.ContentFetchedEvent event) {					

@@ -126,11 +126,8 @@ public class UserMessage extends PopupPanel{
 			public void run() {
 				if(answer.getAnswer()!=null){
 					cancel();
-					friendsXml = answer.getAnswer();
-					makeInterface();	
-					setWidget(mainPanel);
-					self.center();
-					self.show();	
+					Window.alert("the Msg Ans: "+answer.getAnswer());
+
 				}
 			}
 		};
