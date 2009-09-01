@@ -39,7 +39,17 @@ public class UserMessage extends PopupPanel{
 	
 	private void getFriends()
 	{
+		final Timer timer = new Timer() {
+			public void run() {
+				if(friendsXml!=null){
+					cancel();
+
+				}
+			}
+		};
 		
+		timer.scheduleRepeating(1000);
+
 	}
 
 	private void makeInterface() {
@@ -79,17 +89,6 @@ public class UserMessage extends PopupPanel{
 		onlineFriendsListBox.addItem("stuff");
 		
 		
-		final Timer timer = new Timer() {
-			public void run() {
-				if(friendsXml!=null){
-					cancel();
-
-				}
-			}
-		};
-		
-		timer.scheduleRepeating(1000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
-
 		try{
 			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
 		} catch (Exception e) {
@@ -121,7 +120,7 @@ public class UserMessage extends PopupPanel{
 		
 		messageTextArea.setSize("100%", "210px");
 		rightBottomPanel.setSize("100%", "100%");
-		mainPanel.setSize("100%", "100%");
+		mainPanel.setSize("100%", "50%");
 
 		
 	}
