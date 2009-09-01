@@ -36,6 +36,11 @@ public class UserMessage extends PopupPanel{
 		this.center();
 		this.show();		
 	}
+	
+	private void getFriends()
+	{
+		
+	}
 
 	private void makeInterface() {
 		
@@ -86,10 +91,9 @@ public class UserMessage extends PopupPanel{
 		timer.scheduleRepeating(1000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
 
 		try{
-			friendsXml
 			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
 		} catch (Exception e) {
-			Window.alert("An Error Occured while retriving the list of your friends\n\n"+e.toString());	
+			Window.alert("An Error occured while parsing the list of your friends\n\n"+e.toString());	
 		}
 		
 		if(friendList.isEmpty())
