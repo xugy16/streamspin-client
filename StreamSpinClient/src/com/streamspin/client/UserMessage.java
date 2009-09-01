@@ -25,7 +25,6 @@ public class UserMessage extends PopupPanel{
 	private ListBox onlineFriendsListBox = new ListBox(true);
 	private String friendsXml = null;
 	private ArrayList<Friend> friendList = new ArrayList<Friend>();
-	private AnswerWrapper answer;
 	final UserMessage self = this;
 	
 	
@@ -37,7 +36,7 @@ public class UserMessage extends PopupPanel{
 	
 	private void getFriends()
 	{
-		answer = new AnswerWrapper();
+		final AnswerWrapper answer = new AnswerWrapper();
 		
 		new StreamSpinContact().contactStreamSpin(6, answer);
 		final Timer timer = new Timer() {
@@ -69,31 +68,16 @@ public class UserMessage extends PopupPanel{
 		
 		
 		submitButton.addClickListener(new ClickListener(){
-
 			public void onClick(Widget sender) {
-				sendMessage();
-				self.hide();	
+				for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
+		    	      if (onlineFriendsListBox.isItemSelected(i)) {
+		    	    	  	sendMessage(messageTextArea.getText(), Integer.parseInt(onlineFriendsListBox.getValue(i)));
+		    	      }
+				}
 			}
 		});
 		
-//		onlineFriendsListBox.addItem("Friend1");
-//		onlineFriendsListBox.addItem("Friend2");
-//		onlineFriendsListBox.addItem("Friend3");
-//		onlineFriendsListBox.addItem("Friend4");
-//		onlineFriendsListBox.addItem("Friend5");
-//		onlineFriendsListBox.addItem("Friend6");
-//		onlineFriendsListBox.addItem("Friend7");
-//		onlineFriendsListBox.addItem("Friend8");
-//		onlineFriendsListBox.addItem("Friend9");
-//		onlineFriendsListBox.addItem("Friend10");
-//		onlineFriendsListBox.addItem("Friend11");
-//		onlineFriendsListBox.addItem("Dell1","Dell2");
-//		onlineFriendsListBox.setTitle("foo");
-//		onlineFriendsListBox.addItem("tqg");
-//		onlineFriendsListBox.addItem("funny");
-//		onlineFriendsListBox.addItem("stuff");
-		
-		Window.alert("friendXml\n"+friendsXml);
+		//Window.alert("friendXml\n"+friendsXml);
 		if (!friendsXml.isEmpty()) {
 			try {
 				friendList = XmlParser.instance().friendXmlParsing(friendsXml);
@@ -108,7 +92,6 @@ public class UserMessage extends PopupPanel{
 		{
 			for (Friend friend : friendList) {
 				onlineFriendsListBox.addItem(friend.getName(), ""+ friend.getId());
-				//onlineFriendsListBox.
 			}
 		}
 		
@@ -116,10 +99,10 @@ public class UserMessage extends PopupPanel{
 		onlineFriendsListBox.setVisibleItemCount(14);
 		onlineFriendsListBox.addChangeListener(new ChangeListener(){
 			public void onChange(Widget sender) {
-				String msg = "Selected items: ";
+				String msg = "Selected items:\n";
 	    	    for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
 	    	      if (onlineFriendsListBox.isItemSelected(i)) {
-	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n " + onlineFriendsListBox.getValue(i)+"\n";
+	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n" + onlineFriendsListBox.getValue(i)+"\n";
 	    	      }
 	    	    }
 				Window.alert(msg);		
@@ -135,7 +118,28 @@ public class UserMessage extends PopupPanel{
 	}
 
 
-	protected void sendMessage() {
+	protected void sendMessage(String message, int receiverID) {
+		final AnswerWrapper answer = new AnswerWrapper();
+		
+		new StreamSpinContact().contactStreamSpin(3, answer, "msg="+message, "rcv"+receiverID );
+		final Timer timer = new Timer() {
+			public void run() {
+				if(answer.getAnswer()!=null){
+					cancel();
+					friendsXml = answer.getAnswer();
+					makeInterface();	
+					setWidget(mainPanel);
+					self.center();
+					self.show();	
+				}
+			}
+		};
+		
+		timer.scheduleRepeating(1000);
+		
+	}
+	
+	protected void sendMessageAsync() {
 		// TODO Auto-generated method stub
 		
 	}
