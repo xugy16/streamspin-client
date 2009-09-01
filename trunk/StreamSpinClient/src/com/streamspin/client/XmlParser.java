@@ -133,10 +133,31 @@ public class XmlParser {
 		return usrInfo;
 	}
 	
-	public ArrayList<Friend> friendXmlParsing(String xml) {
+	public ArrayList<Friend> friendXmlParsing(String xml) throws Exception{
 		
 		friendList = new ArrayList<Friend>();
-		//TODO implement parsing
+		
+		try {
+			Document xmlDoc = XMLParser.parse(xml);
+			Element root = xmlDoc.getDocumentElement();
+
+			int msgNum = root.getElementsByTagName("friend").getLength();
+			Element idElement = null;
+			Element nameElement = null;
+			int idValue;
+			String nameValue = null;
+			for (int i = 0; i < msgNum; i++) 
+			{
+				idElement = (Element) root.getElementsByTagName("id").item(i);
+				nameElement = (Element) root.getElementsByTagName("name").item(i);
+				idValue = Integer.parseInt(idElement.getChildNodes().item(0).toString());
+				nameValue = nameElement.getChildNodes().item(0).getNodeValue();
+				
+				friendList.add(new Friend(idValue,nameValue));
+			}
+		} catch (Exception e) {
+			throw(e);
+		}
 		
 		return friendList;
 		

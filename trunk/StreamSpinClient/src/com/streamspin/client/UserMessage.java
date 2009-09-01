@@ -25,25 +25,30 @@ public class UserMessage extends PopupPanel{
 	private ListBox onlineFriendsListBox = new ListBox(true);
 	private String friendsXml = null;
 	private ArrayList<Friend> friendList = new ArrayList<Friend>();
+	private AnswerWrapper answer;
 	final UserMessage self = this;
 	
 	
 	public UserMessage()
 	{
 		super(false);
-		makeInterface();	
-		setWidget(mainPanel);
-		this.center();
-		this.show();		
+		getFriends();
 	}
 	
 	private void getFriends()
 	{
+		answer = new AnswerWrapper();
+		
+		new StreamSpinContact().contactStreamSpin(5, answer);
 		final Timer timer = new Timer() {
 			public void run() {
-				if(friendsXml!=null){
+				if(answer.getAnswer()!=null){
 					cancel();
-
+					friendsXml = answer.getAnswer();
+					makeInterface();	
+					setWidget(mainPanel);
+					self.center();
+					self.show();	
 				}
 			}
 		};
@@ -71,38 +76,39 @@ public class UserMessage extends PopupPanel{
 			}
 		});
 		
-		onlineFriendsListBox.addItem("Friend1");
-		onlineFriendsListBox.addItem("Friend2");
-		onlineFriendsListBox.addItem("Friend3");
-		onlineFriendsListBox.addItem("Friend4");
-		onlineFriendsListBox.addItem("Friend5");
-		onlineFriendsListBox.addItem("Friend6");
-		onlineFriendsListBox.addItem("Friend7");
-		onlineFriendsListBox.addItem("Friend8");
-		onlineFriendsListBox.addItem("Friend9");
-		onlineFriendsListBox.addItem("Friend10");
-		onlineFriendsListBox.addItem("Friend11");
-		onlineFriendsListBox.addItem("Dell1","Dell2");
-		onlineFriendsListBox.setTitle("foo");
-		onlineFriendsListBox.addItem("tqg");
-		onlineFriendsListBox.addItem("funny");
-		onlineFriendsListBox.addItem("stuff");
+//		onlineFriendsListBox.addItem("Friend1");
+//		onlineFriendsListBox.addItem("Friend2");
+//		onlineFriendsListBox.addItem("Friend3");
+//		onlineFriendsListBox.addItem("Friend4");
+//		onlineFriendsListBox.addItem("Friend5");
+//		onlineFriendsListBox.addItem("Friend6");
+//		onlineFriendsListBox.addItem("Friend7");
+//		onlineFriendsListBox.addItem("Friend8");
+//		onlineFriendsListBox.addItem("Friend9");
+//		onlineFriendsListBox.addItem("Friend10");
+//		onlineFriendsListBox.addItem("Friend11");
+//		onlineFriendsListBox.addItem("Dell1","Dell2");
+//		onlineFriendsListBox.setTitle("foo");
+//		onlineFriendsListBox.addItem("tqg");
+//		onlineFriendsListBox.addItem("funny");
+//		onlineFriendsListBox.addItem("stuff");
 		
 		
 		try{
 			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
 		} catch (Exception e) {
-			Window.alert("An Error occured while parsing the list of your friends\n\n"+e.toString());	
+			Window.alert("An Error occurred while retrieving and parsing the list of your friends\n\n"+e.toString());	
 		}
 		
 		if(friendList.isEmpty())
-			onlineFriendsListBox.addItem("Empty Friend List", "No Friends have been retrieved from StreamSpin");
-		
-		for(Friend friend: friendList)
+			onlineFriendsListBox.addItem("Empty Friend List",
+					"No Friends have been retrieved from StreamSpin");
+		else 
 		{
-			onlineFriendsListBox.addItem(friend.getName(), ""+friend.getId());
+			for (Friend friend : friendList) {
+				onlineFriendsListBox.addItem(friend.getName(), ""+ friend.getId());
+			}
 		}
-		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
 		onlineFriendsListBox.setVisibleItemCount(14);
 		onlineFriendsListBox.addChangeListener(new ChangeListener(){
