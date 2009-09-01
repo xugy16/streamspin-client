@@ -34,17 +34,18 @@ protected void contactStreamSpin(int requestType, AnswerWrapper answer, String .
 
 	
 	private void contactStreamSpinAsync(int requestType, String ... args) {
-		String arg = null;
+		String arg ="";
 		for(String s: args)
 		{
 			arg += "&"+s;
 		}
-		Window.alert("arg "+arg+"\nargs "+args.toString());
+
 		if(intrinsics == null) Window.alert("a problem.. the google url-translation feature has failed..");
 		//Window.alert("contactStreamSpinAsync "+xml);
 		String url = "http://webclient.streamspin.com/Default.aspx?type="+requestType
 		+"&un="+StreamSpinClient.USERNAME+"&pw="+StreamSpinClient.PASSWORD+arg;
 		//String altUrl = "http://streamspin-client.googlecode.com/svn/trunk/StreamSpinClient/www/com.streamspin.StreamSpinClient/content.xml";
+		Window.alert("url "+url);
 		try {
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(ContentFetchedHandler.ContentFetchedEvent event) {					
