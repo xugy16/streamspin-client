@@ -560,7 +560,7 @@ function dX(){return yz}
 function eX(){var a;a=ee;a+=fe+this.b+ge;a+=he+this.a+ge;return a}
 function wW(){}
 _=wW.prototype=new p5();_.gC=dX;_.tS=eX;_.tI=67;_.a=null;_.b=null;function EW(){EW=oab;nO()}
-function DW(c,b){var a;EW();iO(c,true);c.a=b;c.b=c;if(b.indexOf(ie)==0){$wnd.open(c.a,je,null)}else{a=bJ(new FI(),c.a,false);uK(a,zW(new yW(),c))}return c}
+function DW(c,b){var a;EW();iO(c,true);c.a=b;c.b=c;if(b.indexOf(ie)==0){$wnd.open(c.a,je,null)}else{a=bJ(new FI(),c.a,false);uK(a,zW(new yW(),c));zP(c,a);pO(c)}return c}
 function aX(){return xz}
 function xW(){}
 _=xW.prototype=new pN();_.gC=aX;_.tI=68;_.a=null;_.b=null;function zW(b,a){b.a=a;return b}

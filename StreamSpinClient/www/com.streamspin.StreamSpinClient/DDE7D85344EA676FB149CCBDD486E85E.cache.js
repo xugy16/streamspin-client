@@ -590,7 +590,7 @@ function oY(){return jA}
 function pY(){var a;a=je;a+=le+this.b+me;a+=ne+this.a+me;return a}
 function bY(){}
 _=bY.prototype=new A6();_.gC=oY;_.tS=pY;_.tI=67;_.a=null;_.b=null;function jY(){jY=zbb;dP()}
-function iY(c,b){var a;jY();EO(c,true);c.a=b;c.b=c;if(b.indexOf(oe)==0){$wnd.open(c.a,pe,null)}else{a=wJ(new uJ(),c.a,false);jL(a,eY(new dY(),c))}return c}
+function iY(c,b){var a;jY();EO(c,true);c.a=b;c.b=c;if(b.indexOf(oe)==0){$wnd.open(c.a,pe,null)}else{a=wJ(new uJ(),c.a,false);jL(a,eY(new dY(),c));pQ(c,a);fP(c)}return c}
 function lY(){return iA}
 function cY(){}
 _=cY.prototype=new fO();_.gC=lY;_.tI=68;_.a=null;_.b=null;function eY(b,a){b.a=a;return b}

@@ -43,11 +43,11 @@ public class ContentPopup extends PopupPanel {
 	{
 		HTML con = new HTML(content, false);
 		con.addClickListener(new ClickListener(){
-
 			public void onClick(Widget sender) {
 				self.hide();
 			}		
 		});
+		setWidget(con);
 	}
 	
 	private void openUrl()
