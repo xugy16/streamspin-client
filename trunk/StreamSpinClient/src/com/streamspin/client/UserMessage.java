@@ -119,8 +119,8 @@ public class UserMessage extends PopupPanel{
 		});
 		
 		messageTextArea.setSize("100%", "210px");
-		rightBottomPanel.setSize("100%", "100%");
-		mainPanel.setSize("100%", "50%");
+		rightBottomPanel.setSize("100%", "50%");
+		mainPanel.setSize("100%", "100%");
 
 		
 	}
