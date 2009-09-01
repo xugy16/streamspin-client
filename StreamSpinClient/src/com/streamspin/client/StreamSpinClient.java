@@ -297,8 +297,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				final ContentPopup con = new ContentPopup(mainTopWindowListBox.getValue(mainTopWindowListBox.getSelectedIndex()));
 				con.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
 					public void setPosition(int offsetWidth, int offsetHeight) {
-						int left = (Window.getClientWidth() - offsetWidth);
-						int right = (Window.getClientHeight() - offsetHeight);
+						int left = (Window.getClientWidth() - offsetWidth/2);
+						int right = (Window.getClientHeight() - offsetHeight/2);
 						con.setPopupPosition(left, right);
 					}
 				});
