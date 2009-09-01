@@ -38,7 +38,7 @@ public class UserMessage extends PopupPanel{
 	{
 		final AnswerWrapper answer = new AnswerWrapper();
 		
-		new StreamSpinContact().contactStreamSpin(6, answer);
+		new StreamSpinContact().contactStreamSpin(6, answer,"uid="+StreamSpinClient.UID);
 		final Timer timer = new Timer() {
 			public void run() {
 				if(answer.getAnswer()!=null){
@@ -121,7 +121,7 @@ public class UserMessage extends PopupPanel{
 	protected void sendMessage(String message, int receiverID) {
 		final AnswerWrapper answer = new AnswerWrapper();
 		
-		new StreamSpinContact().contactStreamSpin(3, answer, "msg="+message, "rcv"+receiverID );
+		new StreamSpinContact().contactStreamSpin(3, answer, "msg="+message, "rcv"+receiverID, "uid="+StreamSpinClient.UID);
 		final Timer timer = new Timer() {
 			public void run() {
 				if(answer.getAnswer()!=null){

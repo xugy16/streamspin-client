@@ -104,7 +104,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	Command testConnect = new Command() {
 		public void execute() {
-//			StreamSpinContact.instance().contactStreamSpin(8, ssAnswer);
 			new StreamSpinContact().contactStreamSpin(8, ssAnswer);
 		}
 	};
