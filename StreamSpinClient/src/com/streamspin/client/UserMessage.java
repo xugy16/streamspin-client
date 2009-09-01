@@ -2,6 +2,7 @@ package com.streamspin.client;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -22,7 +23,7 @@ public class UserMessage extends PopupPanel{
 	private Button submitButton = new Button("Send Message");
 	private Button cancelButton = new Button("Cancel");
 	private ListBox onlineFriendsListBox = new ListBox(true);
-	private String friendsXml;
+	private String friendsXml = null;
 	private ArrayList<Friend> friendList = new ArrayList<Friend>();
 	final UserMessage self = this;
 	
@@ -44,7 +45,7 @@ public class UserMessage extends PopupPanel{
 		rightPanel.add(rightBottomPanel);
 		mainPanel.add(onlineFriendsListBox);
 		mainPanel.add(rightPanel);
-		mainPanel.setSize("310px", ""+Window.getClientHeight()*0.85);
+		mainPanel.setSize("310px", "320px");
 		
 		
 		submitButton.addClickListener(new ClickListener(){
@@ -72,11 +73,33 @@ public class UserMessage extends PopupPanel{
 		onlineFriendsListBox.addItem("funny");
 		onlineFriendsListBox.addItem("stuff");
 		
-		friendList = XmlParser.instance().friendXmlParsing(friendsXml);
+		
+		final Timer timer = new Timer() {
+			public void run() {
+				if(friendsXml!=null){
+					cancel();
+
+				}
+			}
+		};
+		
+		timer.scheduleRepeating(1000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
+
+		try{
+			friendsXml
+			friendList = XmlParser.instance().friendXmlParsing(friendsXml);
+		} catch (Exception e) {
+			Window.alert("An Error Occured while retriving the list of your friends\n\n"+e.toString());	
+		}
+		
+		if(friendList.isEmpty())
+			onlineFriendsListBox.addItem("Empty Friend List", "No Friends have been retrieved from StreamSpin");
+		
 		for(Friend friend: friendList)
 		{
 			onlineFriendsListBox.addItem(friend.getName(), ""+friend.getId());
 		}
+		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
 		onlineFriendsListBox.setVisibleItemCount(14);
 		onlineFriendsListBox.addChangeListener(new ChangeListener(){
@@ -87,8 +110,7 @@ public class UserMessage extends PopupPanel{
 	    	        msg += onlineFriendsListBox.getItemText(i) + " " + onlineFriendsListBox.getValue(i)+"\n";
 	    	      }
 	    	    }
-
-				Window.alert(""+msg);		
+				Window.alert(msg);		
 			}
 			
 		});
