@@ -63,7 +63,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private Button loginButton = new Button();
 	private Image daisyPic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
 	private int CLIENT_ROW_HEIGHT = 20;
-	private int UPDATE_FREQ_MILLI_SEC = 25000; //DO NOT set this value below 20000, google will not be happy and the program will behave weird
+	//DO NOT set this value below 20000, the mighty google will not be happy and the program updates will behave weird
+	private int UPDATE_FREQ_MILLI_SEC = 25000; 
 	protected static int UID = -1;
 	protected static String USERNAME;
 	protected static String PASSWORD;
@@ -344,6 +345,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
+		daisyPic.setHeight("40px");
 		makeWindowTitle(firstCharCapitalized(USERNAME)+"@StreamSpin");
 
 		mainMenuPanel.add(mainLeftMenu);
