@@ -56,6 +56,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private Button loginButton = new Button();
 	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
 	private int CLIENT_ROW_HEIGHT = 20;
+	private int UPDATE_FREQ_MILLI_SEC = 25000; //DO NOT set this value below 20000, google will not be happy and the program will behave weird
 	public static int UID = -1;
 	public static String USERNAME = "jeppe";
 	public static String PASSWORD = "jeppejeppe";
@@ -96,16 +97,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		public void execute() {}
 	};
 	
-	//Not implemented command, used for 
+	//Not Implemented command, used for 
 	Command ni = new Command() { 
 		public void execute() {
 			Window.alert("You selected a menu item which has not yet been implemented!");
-		}
-	};
-
-	Command testConnect = new Command() {
-		public void execute() {
-			new StreamSpinContact().contactStreamSpin(8, ssAnswer);
 		}
 	};
 	
@@ -137,8 +132,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 		
 		public void execute() {
-			Window.alert("Id: "+id+"\nstart url: "+startURL);
-			// TODO make command which starts service
+			Window.open(startURL, "_blank", null);
 		}
 	}
 	
@@ -306,15 +300,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		});
 
 		mainTopWindowListBox.setVisibleItemCount(CLIENT_ROW_HEIGHT);
-		mainTopWindowListBox.setWidth("100%");
-
-//		mainBottomWindowTextArea.setText("This is some content that should show how the widget handles stuff,\n <b> wwwwwwwwwww wwwwwwwwww wwwwwwwwww wwwwew rw er</b>");
-//		mainBottomWindowTextArea.setReadOnly(true);
-//		mainBottomWindowTextArea.setWidth("100%");
-//		mainBottomWindowTextArea.setHeight("150px");
-//
+		mainTopWindowListBox.setWidth("100%");//
 		mainWindowPanel.add(mainTopWindowListBox);
-//		mainWindowPanel.add(mainBottomWindowTextArea);
 		mainWindowPanel.setHeight("100px");
 		mainWindowPanel.setWidth("100%");
 	}
@@ -333,7 +320,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			}
 		};
 		
-		timer.scheduleRepeating(25000);
+		timer.scheduleRepeating(UPDATE_FREQ_MILLI_SEC);
 	}
 	
 	private class mainTopWindowListBoxContentupdate
