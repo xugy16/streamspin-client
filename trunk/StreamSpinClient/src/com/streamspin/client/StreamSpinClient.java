@@ -61,7 +61,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private TextBox loginUnTextBox = new TextBox();
 	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
 	private Button loginButton = new Button();
-	private Image daisyPic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
+	private Image daisyPic = new Image(GWT.getModuleBaseURL() + "images/daisy-small.gif");
 	private int CLIENT_ROW_HEIGHT = 20;
 	//DO NOT set this value below 20000, the mighty google will not be happy and the program updates will behave weird
 	private int UPDATE_FREQ_MILLI_SEC = 25000; 
