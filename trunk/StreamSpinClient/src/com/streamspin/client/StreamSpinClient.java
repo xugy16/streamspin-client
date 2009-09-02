@@ -273,7 +273,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
 		makeMainRightButton();
-		makeWindowTitle(USERNAME+"@StreamSpin");
+		makeWindowTitle(firstCharCapitalized(USERNAME)+"@StreamSpin");
 
 		mainMenuPanel.add(mainLeftMenu);
 		mainMenuPanel.add(titleBar);
@@ -412,6 +412,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			
 			timer.scheduleRepeating(1000); //Can be lowered to facilitate faster startup time, but the loading screen is so lovely :)
 		}
+	}
+	
+	public static String firstCharCapitalized(String s) {
+		return (s.length() > 0) ? Character.toUpperCase(s.charAt(0))+ s.substring(1) : s;
 	}
 }
 
