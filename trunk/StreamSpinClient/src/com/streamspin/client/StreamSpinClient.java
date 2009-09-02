@@ -1,7 +1,6 @@
 package com.streamspin.client;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.gadgets.client.DynamicHeightFeature;
@@ -148,8 +147,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 		
 		public void execute() {
-			Window.alert(startURL += "?userid="+UID+"&serviceid"+id+"&unique="+new Date().getTime()+"HQH"+System.currentTimeMillis());
-			//Window.open(startURL, "_blank", null);
+			startURL += "?userid="+UID+"&serviceid"+id+"&unique="+System.currentTimeMillis();
+			Window.open(startURL, "_blank", null);
 		}
 	}
 	
