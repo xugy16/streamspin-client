@@ -147,7 +147,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 		
 		public void execute() {
-			startURL += "?userid="+UID+"&serviceid"+id+"&unique="+System.currentTimeMillis();
+			startURL = startURL+"?userid="+UID+"&serviceid="+id+"&unique="+System.currentTimeMillis();
 			Window.open(startURL, "_blank", null);
 		}
 	}
