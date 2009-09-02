@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -33,10 +32,19 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author jenslyn
- * @version 0.3.5
- *
+ * @version 0.6.0
+ * @gadgetVersion 1.7
+ * 
+ * StreamSpinClient is the main class which extends Gadget in order
+ * for GWT to be able to handle gadget specific features like adjustment
+ * of the gadget container height (NeedsDynamicHeight)-
+ * 
+ * ModulePrefs states the gadget preferences used by the google gadget.
+ * 
+ * @see com.google.gwt.gadgets.client.NeedsIntrinsics
+ * @see com.google.gwt.gadgets.client.NeedsDynamicHeight
  */
-@ModulePrefs(title = "StreamSpin Client", author = "jenslyn", author_email = "jenslyn42@gmail.com")
+@ModulePrefs(title = "StreamSpin Client", author = "jenslyn", author_email = "jenslyn@cs.aau.dk")
 public class StreamSpinClient extends Gadget<UserPreferences> implements
 		NeedsDynamicHeight, NeedsIntrinsics{
 
@@ -46,72 +54,108 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private HorizontalPanel mainMenuPanel = new HorizontalPanel();
 	private VerticalPanel mainWindowPanel = new VerticalPanel();
 	private ListBox mainTopWindowListBox = new ListBox(false);
-	private TextArea mainBottomWindowTextArea = new TextArea();
 	private MenuBar mainLeftMenu = new MenuBar();
-	private Button mainRightButton = new Button("someTest");
 	private Label mainStatusLabel = new Label();
 	private HTML titleBar = new HTML();
 	private VerticalPanel loginPanel = new VerticalPanel();
 	private TextBox loginUnTextBox = new TextBox();
 	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
 	private Button loginButton = new Button();
-	private Image pic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
+	private Image daisyPic = new Image(GWT.getModuleBaseURL() + "images/daisy.gif");
 	private int CLIENT_ROW_HEIGHT = 20;
 	private int UPDATE_FREQ_MILLI_SEC = 25000; //DO NOT set this value below 20000, google will not be happy and the program will behave weird
-	public static int UID = -1;
-	public static String USERNAME;
-	public static String PASSWORD;
+	protected static int UID = -1;
+	protected static String USERNAME;
+	protected static String PASSWORD;
 	
-	int test = 0;
-	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
     AnswerWrapper ssAnswer = new AnswerWrapper();
 
-	// Image image = new Image(GWT.getModuleBaseURL() + "images/somePic.gif");
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see *
-	 * com.google.gwt.gadgets.client.Gadget#init(com.google.gwt.gadgets.client *
-	 * .UserPreferences)
+	 * @param CLIENT_ROW_HEIGHT		Defines the height of the gadget based on the number of
+	 *            					visible update rows in the client.
+	 * @param UPDATE_FREQ_MILLI_SEC	Number of milliseconds between each 
+	 * 								check for new updates from StreamSpin.
+	 * @param UID					The user id of the user logged in.
+	 * @param USERNAME				The user name of the user logged in, only used at login time
+	 * @param PASSWORD				The password of the user logged in, used with most request to
+	 *            					the StreamSpin server
+	 * 
+	 * @see com.google.gwt.gadgets.client.Gadget#init(com.google.gwt.gadgets.client.UserPreferences)
 	 */	
 
 
 	@Override
+	/**
+	 * Main entry point, first thing called at program startup
+	 */
 	protected void init(UserPreferences preferences) {
 		showLogin();
 	}
 
+	/**
+	 * Initializes the {@link DynamicHeightFeature}, enabling the gadget
+	 * to adjust its height (it is impossible adjust its width, it is 
+	 * determined by the page it is placed on).
+	 * 
+	 */
 	public void initializeFeature(DynamicHeightFeature heightFeature) {
 		this.gadgetHeightFeature = heightFeature;
 	}
 
+	/**
+	 * Initializes the {@link IntrinsicFeature} enabling the compiled
+	 * Java Script to call StreamSpin.com, no matter what domain the
+	 * gadget is hosted on.
+	 * 
+	 * @see com.google.gwt.gadgets.client.IntrinsicFeature
+	 */
 	public void initializeFeature(IntrinsicFeature feature) {
 		this.intrinsics = feature;	
 	}
 
+	/**
+	 * Since the {@link IntrinsicFeature} can only be initialized 
+	 * in the main class, this function allows other classes to call
+	 * a url. 
+	 * @return The {@link IntrinsicFeature} variable
+	 */
 	public static IntrinsicFeature getIntrinsics() {
 		return intrinsics;
 	}
 	
-	//Used for empty menu items, not meant to be choosen
-	Command cmd = new Command() {
-		public void execute() {}
-	};
-	
-	//Not Implemented command, used for 
+	/**
+	 * Command used in the menu for items not implemented or
+	 * "No items" sub-menus.
+	 */
 	Command ni = new Command() { 
 		public void execute() {
-			Window.alert("You selected a menu item which has not yet been implemented!");
 		}
 	};
 	
+	/**
+	 * Command: Sets the users current location
+
+	 * Based on a predefined location defined
+	 * on the StreamSpin webpage, and retrieved
+	 * by the client at login time
+	 * 
+	 * @author jenslyn
+	 */
 	private class setLocation implements Command
 	{
 		private Double lon, lat;
 		
-		public setLocation(Double longtitude, Double latitude)
+		/**
+		 * setLocation constructor
+		 * 
+		 * @param longitude Longitude of the location
+		 * @param latitude Latitude of the location
+		 */
+		public setLocation(Double longitude, Double latitude)
 		{
-			this.lon = longtitude;
+			this.lon = longitude;
 			this.lat = latitude;
 		}
 		
@@ -121,25 +165,29 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			new StreamSpinContact().contactStreamSpin(5, answer, "lon="+ lon, "lat" + lat, "uid="+ StreamSpinClient.UID);
 			final Timer timer = new Timer() {
 				public void run() {
-//					if (answer.getAnswer() != null) {
-//						cancel();
-//						if (answer.getAnswer().equalsIgnoreCase("true"))
-//							Window.alert("The Location Ans: " + answer.getAnswer());
-//						else if (answer.getAnswer().equalsIgnoreCase("false") || answer.getAnswer().isEmpty())
-//							Window.alert("The Location was not set:\n\n"+ answer.getAnswer());
-//					}
 				}
 			};
-
 			timer.scheduleRepeating(1000);
 		}
 	}
 	
+
+	/**
+	 * Command: starts a service
+	 * 
+	 * @author jenslyn
+	 */
 	private class startService implements Command
 	{
 		private int id;
 		private String startURL;
 		
+		/**
+		 * startService constructor
+		 * 
+		 * @param id The service id
+		 * @param StartUrl The service url
+		 */
 		public startService(int id, String StartUrl)
 		{
 			this.id = id;
@@ -152,10 +200,21 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 	}
 	
+	/**
+	 * Command: sets the current interrest profile
+	 * of the user.
+	 * 
+	 * @author jenslyn
+	 */
 	private class setProfile implements Command
 	{
 		private int id;
 		
+		/**
+		 * setProfile contructor
+		 * 
+		 * @param id Profile id
+		 */
 		public setProfile(int id)
 		{
 			this.id = id;
@@ -167,16 +226,25 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 	}
 
+	/**
+	 * Command: makes a new message Object
+	 * to allow the user to send a message
+	 * to any of his online friends.
+	 */
 	Command writeMessage = new Command() {
 		public void execute() {
 			new UserMessage();
 		}
 	};
 	
+	/**
+	 * ...
+	 */
 	protected void makePic() {
-		pic.setUrl(GWT.getModuleBaseURL() + "images/daisy.gif");
+		daisyPic.setUrl(GWT.getModuleBaseURL() + "images/daisy.gif");
 	}
 
+	
 	protected void makeMain() {
 		
 		makeMainMenu();
@@ -229,10 +297,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		debugMenu.addItem("Off", ni);
 
 		MenuBar setLocationMenu = new MenuBar(true);
-		setLocationMenu.addItem("Use GPS", cmd); // Not needed in web-client, but it seems so assuring to have under the location menu
+		setLocationMenu.addItem("Use GPS", ni); // Not needed in web-client, but it seems so assuring to have under the location menu
 		if(menuItems.getLocations().isEmpty())
 		{
-			setLocationMenu.addItem("No Predefined Locations",cmd);
+			setLocationMenu.addItem("No Predefined Locations",ni);
 		}
 		for(Location loc: menuItems.getLocations())
 		{
@@ -242,7 +310,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		MenuBar startServiceMenu = new MenuBar(true);
 		if(menuItems.getStartService().isEmpty())
 		{
-			startServiceMenu.addItem("No Service Subscriptions found",cmd);
+			startServiceMenu.addItem("No Service Subscriptions found",ni);
 		}
 		for(StartService sService: menuItems.getStartService())
 		{
@@ -252,7 +320,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		MenuBar setProfileMenu = new MenuBar(true);
 		if(menuItems.getProfile().isEmpty())
 		{
-			setProfileMenu.addItem("No Interests Profiles found",cmd);
+			setProfileMenu.addItem("No Interests Profiles found",ni);
 		}
 		for(Profile p: menuItems.getProfile())
 		{
@@ -273,30 +341,17 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		mainLeftMenu.setAutoOpen(false);
 		mainLeftMenu.setWidth("65px");
 	}
-	
-	// TODO add correct event at button press
-	protected void makeMainRightButton() {
-		mainRightButton.addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
-				// testConnection();
-				mainBottomWindowTextArea.setText(ssAnswer.getAnswer());
-			}
-		});
-		mainRightButton.getElement().setInnerText("Send Message");
-		mainRightButton.setTitle("You can send messages to your friends with this");
-	}
 
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
-		makeMainRightButton();
 		makeWindowTitle(firstCharCapitalized(USERNAME)+"@StreamSpin");
 
 		mainMenuPanel.add(mainLeftMenu);
 		mainMenuPanel.add(titleBar);
-		mainMenuPanel.add(mainRightButton);
+		mainMenuPanel.add(daisyPic);
 		mainMenuPanel.setCellHorizontalAlignment(mainLeftMenu,HasHorizontalAlignment.ALIGN_LEFT);
 		mainMenuPanel.setCellHorizontalAlignment(titleBar,HasHorizontalAlignment.ALIGN_CENTER);
-		mainMenuPanel.setCellHorizontalAlignment(mainRightButton,HasHorizontalAlignment.ALIGN_RIGHT);
+		mainMenuPanel.setCellHorizontalAlignment(daisyPic,HasHorizontalAlignment.ALIGN_RIGHT);
 		mainMenuPanel.setWidth("100%");
 	}
 
@@ -328,11 +383,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		
 		Timer timer = new Timer() {
 			public void run() {
-				test++;
 				AnswerWrapper ans = new AnswerWrapper();
 				ans.setAnswer(null);
 				new StreamSpinContact().contactStreamSpin(2, ans, "uid="+UID);
-				new mainTopWindowListBoxContentupdate(ans, test).run();
+				new mainTopWindowListBoxContentupdate(ans).run();
 			}
 		};
 		
@@ -343,7 +397,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	{
 		private final AnswerWrapper answer;
 		
-		public mainTopWindowListBoxContentupdate(AnswerWrapper answer, int test) 
+		public mainTopWindowListBoxContentupdate(AnswerWrapper answer) 
 		{
 			this.answer = answer;
 		}
@@ -353,7 +407,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 				if (answer.getAnswer() != null) {
 					cancel();
 					//Window.alert("Check"+test+"\n"+answer.getAnswer());
-					mainTopWindowListBox.addItem("Check"+test,answer.getAnswer());
+					mainTopWindowListBox.addItem("Check",answer.getAnswer());
 					if (!answer.getAnswer().isEmpty()) {
 						ArrayList<Content> content = XmlParser.instance().contentXmlParsing(answer.getAnswer());
 						for (Content cont : content) {
