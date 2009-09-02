@@ -284,7 +284,6 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	protected void makeMainLeftMenu() {
 		
 		UserInfo menuItems = null;
-		//Window.alert(ssAnswer.getAnswer());
 		try{
 			menuItems = XmlParser.instance().userInfoXmlParsing(ssAnswer.getAnswer());
 		} catch (Exception e) {
@@ -345,7 +344,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
-		daisyPic.setHeight("40px");
+		daisyPic.setHeight("30px");
 		makeWindowTitle(firstCharCapitalized(USERNAME)+"@StreamSpin");
 
 		mainMenuPanel.add(mainLeftMenu);
