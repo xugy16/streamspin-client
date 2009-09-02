@@ -1,6 +1,8 @@
 package com.streamspin.client;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import com.google.gwt.gadgets.client.Gadget;
@@ -58,8 +60,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private int CLIENT_ROW_HEIGHT = 20;
 	private int UPDATE_FREQ_MILLI_SEC = 25000; //DO NOT set this value below 20000, google will not be happy and the program will behave weird
 	public static int UID = -1;
-	public static String USERNAME = "jeppe";
-	public static String PASSWORD = "jeppejeppe";
+	public static String USERNAME;
+	public static String PASSWORD;
 	
 	int test = 0;
 	//private ArrayList<ContentPopup> contentList = new ArrayList<ContentPopup>();
@@ -115,8 +117,22 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 		
 		public void execute() {
-			Window.alert("Longtitude: "+lon+"\nLatitude: "+lat);
-			// TODO make command which sets location
+			final AnswerWrapper answer = new AnswerWrapper();
+
+			new StreamSpinContact().contactStreamSpin(5, answer, "lon="+ lon, "lat" + lat, "uid="+ StreamSpinClient.UID);
+			final Timer timer = new Timer() {
+				public void run() {
+//					if (answer.getAnswer() != null) {
+//						cancel();
+//						if (answer.getAnswer().equalsIgnoreCase("true"))
+//							Window.alert("The Location Ans: " + answer.getAnswer());
+//						else if (answer.getAnswer().equalsIgnoreCase("false") || answer.getAnswer().isEmpty())
+//							Window.alert("The Location was not set:\n\n"+ answer.getAnswer());
+//					}
+				}
+			};
+
+			timer.scheduleRepeating(1000);
 		}
 	}
 	
@@ -132,7 +148,8 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 		
 		public void execute() {
-			Window.open(startURL, "_blank", null);
+			Window.alert(startURL += "?userid="+UID+"&serviceid"+id+"&unique="+new Date().getTime()+"HQH"+System.currentTimeMillis());
+			//Window.open(startURL, "_blank", null);
 		}
 	}
 	
