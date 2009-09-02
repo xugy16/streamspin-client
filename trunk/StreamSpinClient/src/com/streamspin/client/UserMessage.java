@@ -103,18 +103,18 @@ public class UserMessage extends PopupPanel{
 		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
 		onlineFriendsListBox.setVisibleItemCount(14);
-		onlineFriendsListBox.addChangeListener(new ChangeListener(){
-			public void onChange(Widget sender) {
-				String msg = "Selected items:\n";
-	    	    for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
-	    	      if (onlineFriendsListBox.isItemSelected(i)) {
-	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n" + onlineFriendsListBox.getValue(i)+"\n";
-	    	      }
-	    	    }
-				Window.alert(msg);		
-			}
-			
-		});
+//		onlineFriendsListBox.addChangeListener(new ChangeListener(){
+//			public void onChange(Widget sender) {
+//				String msg = "Selected items:\n";
+//	    	    for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
+//	    	      if (onlineFriendsListBox.isItemSelected(i)) {
+//	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n" + onlineFriendsListBox.getValue(i)+"\n";
+//	    	      }
+//	    	    }
+//				Window.alert(msg);		
+//			}
+//			
+//		});
 		
 		messageTextArea.setSize("100%", ""+((Window.getClientHeight()*0.8)-30));
 		rightBottomPanel.setSize("100%", "30px");
@@ -132,7 +132,10 @@ public class UserMessage extends PopupPanel{
 			public void run() {
 				if(answer.getAnswer()!=null){
 					cancel();
-					Window.alert("the Msg Ans: "+answer.getAnswer());
+					if(answer.getAnswer().equalsIgnoreCase("true"))
+						Window.alert("The Msg Ans: "+answer.getAnswer());
+					else if(answer.getAnswer().equalsIgnoreCase("false") || answer.getAnswer().isEmpty())
+						Window.alert("The Message was not sent:\n\n"+answer.getAnswer());
 				}
 			}
 		};
