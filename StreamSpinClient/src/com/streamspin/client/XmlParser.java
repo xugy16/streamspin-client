@@ -8,6 +8,13 @@ import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.XMLParser;
 import com.google.gwt.xml.client.NodeList;
 
+/**
+ * Singleton class which can parse the
+ * xml returned by various calls to
+ * StreamSpin
+ * 
+ * @author jenslyn
+ */
 public class XmlParser {
 	
 	static private ArrayList<Content> contentList = null;
@@ -16,11 +23,18 @@ public class XmlParser {
 	
 	static private XmlParser _instance = null;
 	
-	
+	/**
+	 * XmlParser private constructor
+	 */
 	private XmlParser(){ }
 	
 	
-	static public XmlParser instance()
+	/**
+	 * Used to instantiate/call the singleton object
+	 * 
+	 * @return singleton object
+	 */
+	public static XmlParser instance()
 	{
 		if(_instance == null) 
 		{
@@ -29,6 +43,15 @@ public class XmlParser {
 		return _instance;
 	}
 	
+	/**
+	 * Parses any content updates from StreamSpin
+	 * 
+	 * @param xml 	String with xml encoded updates.
+	 * 
+	 * @return 		List with {@link Content} objects
+	 * 
+	 * @see com.streamspin.client.Content
+	 */
 	public ArrayList<Content> contentXmlParsing(String xml) {
 		
 		contentList = new ArrayList<Content>();
@@ -58,6 +81,20 @@ public class XmlParser {
 		return contentList;
 	}
 	
+	/**
+	 * Parses all the information relevant to the user when     
+	 * he logs into the StreamSpin service
+	 * 
+	 * @param xml all relevant information about the user in
+	 * StreamSpin populate an {@link UserInfo} object
+	 * 
+	 * @return an {@link UserInfo} object
+	 * 
+	 * @throws Exception If the xml string is not formatted 
+	 * correctly or an empty string is passed to the function
+	 * 
+	 * @see com.streamspin.client.UserInfo
+	 */
 	public UserInfo userInfoXmlParsing(String xml) throws Exception {
 
 		usrInfo = new UserInfo(-1, new ArrayList<Location>(), null, -1,
@@ -127,13 +164,24 @@ public class XmlParser {
 
 		} catch (Exception e) {
 			throw(e);	
-			//Window.alert("There is an exception:\n" + e.getMessage() + "\n\n"+ e.getStackTrace());
 		}
 		
 		return usrInfo;
 	}
 	
-	public ArrayList<Friend> friendXmlParsing(String xml) throws Exception{
+	/**
+	 * Parses the list of all online friends of the user
+	 * 
+	 * @param xml String with xml encoded online friends.
+	 * 
+	 * @return List of {@link Friend} objects
+	 * 
+	 * @throws Exception If the xml string is not formatted 
+	 * correctly or an empty string is passed to the function
+	 * 
+	 * @see com.streamspin.client.Friend
+	 */
+	public ArrayList<Friend> onlineFriendsXmlParsing(String xml) throws Exception{
 		
 		friendList = new ArrayList<Friend>();
 		
@@ -160,6 +208,5 @@ public class XmlParser {
 		}
 		
 		return friendList;
-		
 	}
 }

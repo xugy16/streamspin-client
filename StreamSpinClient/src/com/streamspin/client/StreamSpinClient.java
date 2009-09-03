@@ -35,11 +35,11 @@ import com.google.gwt.user.client.ui.Widget;
  * @version 0.6.0
  * @gadgetVersion 1.7
  * 
+ * ModulePrefs states the gadget preferences used by the google gadget.
+ * 
  * StreamSpinClient is the main class which extends Gadget in order
  * for GWT to be able to handle gadget specific features like adjustment
  * of the gadget container height (NeedsDynamicHeight)-
- * 
- * ModulePrefs states the gadget preferences used by the google gadget.
  * 
  * @see com.google.gwt.gadgets.client.NeedsIntrinsics
  * @see com.google.gwt.gadgets.client.NeedsDynamicHeight
@@ -61,36 +61,47 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	private TextBox loginUnTextBox = new TextBox();
 	private PasswordTextBox loginPwTextBox = new PasswordTextBox();
 	private Button loginButton = new Button();
+	/**
+	 * The daisy Logo (small version with no text below)
+	 */
 	private Image daisyPic = new Image(GWT.getModuleBaseURL() + "images/daisy-small.gif");
+	/**
+	 * Defines the height of the gadget based on the number of
+	 * visible update rows in the client.
+	 */
 	private int CLIENT_ROW_HEIGHT = 20;
+	/**
+	 * Number of milliseconds between each 
+	 * check for new updates from StreamSpin.
+	 */
 	//DO NOT set this value below 20000, the mighty google will not be happy and the program updates will behave weird
 	private int UPDATE_FREQ_MILLI_SEC = 25000; 
+	/**
+	 * The user id of the user logged in.
+	 */
 	protected static int UID = -1;
+	/**
+	 * The user name of the user logged in, only used at login time
+	 */
 	protected static String USERNAME;
+	/**
+	 * The password of the user logged in, 
+	 * used with most request to the StreamSpin server
+	 */
 	protected static String PASSWORD;
 	
+	/**
+	 * Used to hold the answer from StreamSpin
+	 */
     AnswerWrapper ssAnswer = new AnswerWrapper();
 
+
 	/**
-	 * (non-Javadoc)
-	 * 
-	 * @param CLIENT_ROW_HEIGHT		Defines the height of the gadget based on the number of
-	 *            					visible update rows in the client.
-	 * @param UPDATE_FREQ_MILLI_SEC	Number of milliseconds between each 
-	 * 								check for new updates from StreamSpin.
-	 * @param UID					The user id of the user logged in.
-	 * @param USERNAME				The user name of the user logged in, only used at login time
-	 * @param PASSWORD				The password of the user logged in, used with most request to
-	 *            					the StreamSpin server
+	 * Main program entry point, first thing called at program startup
 	 * 
 	 * @see com.google.gwt.gadgets.client.Gadget#init(com.google.gwt.gadgets.client.UserPreferences)
-	 */	
-
-
-	@Override
-	/**
-	 * Main entry point, first thing called at program startup
 	 */
+	@Override
 	protected void init(UserPreferences preferences) {
 		showLogin();
 	}
@@ -127,8 +138,9 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	}
 	
 	/**
-	 * Command used in the menu for items not implemented or
-	 * "No items" sub-menus.
+	 * Command: Does nothing.
+	 * used in the menu for items not implemented or
+	 * the "No items" item in sub-menus.
 	 */
 	Command ni = new Command() { 
 		public void execute() {
@@ -137,7 +149,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	
 	/**
 	 * Command: Sets the users current location
-
+	 *
 	 * Based on a predefined location defined
 	 * on the StreamSpin webpage, and retrieved
 	 * by the client at login time
@@ -202,7 +214,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	}
 	
 	/**
-	 * Command: sets the current interrest profile
+	 * Command: sets the current interest profile
 	 * of the user.
 	 * 
 	 * @author jenslyn
@@ -212,9 +224,9 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		private int id;
 		
 		/**
-		 * setProfile contructor
+		 * setProfile constructor
 		 * 
-		 * @param id Profile id
+		 * @param id Interest profile id
 		 */
 		public setProfile(int id)
 		{
@@ -237,15 +249,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 			new UserMessage();
 		}
 	};
-	
-	/**
-	 * ...
-	 */
-	protected void makePic() {
-		daisyPic.setUrl(GWT.getModuleBaseURL() + "images/daisy.gif");
-	}
 
-	
+	/**
+	 * Constructs the interface after login.
+	 */
 	protected void makeMain() {
 		
 		makeMainMenu();
@@ -267,10 +274,20 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	}
 
-	protected void makeWindowTitle(String string) {
-		titleBar.setText(string);
+	/**
+	 * Changes the headline at the top of the client
+	 * 
+	 * @param headline client headline
+	 */
+	protected void makeWindowTitle(String headline) {
+		titleBar.setText(headline);
 	}
 
+	/**
+	 * Sets the online status
+	 * 
+	 * @param online true if client is online
+	 */
 	protected void makeMainOnlineStatus(Boolean online) {
 		if (online) {
 			mainStatusLabel.getElement().setInnerHTML("Status: <b>Online</b>");
@@ -280,7 +297,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	}
 	
 
-	// TODO add correct method calls for menu items
+	/**
+	 * Constructs the menu, and all menu items
+	 * in the top left corner menu
+	 */
 	protected void makeMainLeftMenu() {
 		
 		UserInfo menuItems = null;
@@ -342,6 +362,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		mainLeftMenu.setWidth("65px");
 	}
 
+	/**
+	 * Constructs the top horizontal panel
+	 * with the menu, headline and daisy logo
+	 */
 	protected void makeMainMenu() {
 		makeMainLeftMenu();
 		daisyPic.setHeight("30px");
@@ -356,6 +380,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		mainMenuPanel.setWidth("100%");
 	}
 
+	/**
+	 * Constructs the list box which shows all
+	 * updates delivered to the client
+	 */
 	protected void makeMainWindowPanel() {
 		mainTopWindowListBoxContent();
 		mainTopWindowListBox.addClickListener(new ClickListener() {
@@ -378,7 +406,10 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		mainWindowPanel.setWidth("100%");
 	}
 
-	
+	/**
+	 * Periodically checks for new content on the
+	 * StreamSpin server.
+	 */
 	protected void mainTopWindowListBoxContent()
 	{
 		
@@ -394,10 +425,22 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		timer.scheduleRepeating(UPDATE_FREQ_MILLI_SEC);
 	}
 	
+	/**
+	 * Adds content to the 
+	 * main area listbox when any new
+	 * content arrives at the client
+	 * 
+	 * @author jenslyn
+	 */
 	private class mainTopWindowListBoxContentupdate
 	{
 		private final AnswerWrapper answer;
 		
+		/**
+		 * mainTopWindowListBoxContentupdate constructor
+		 * 
+		 * @param answer holds the answer returned by StreamSpin
+		 */
 		public mainTopWindowListBoxContentupdate(AnswerWrapper answer) 
 		{
 			this.answer = answer;
@@ -426,8 +469,13 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 	}
 
+	/**
+	 * Constructs the login screen show at client startup.
+	 * It also takes care of contacting StreamSpin and handing
+	 * program control over to {@link startUpLoadingScreen}
+	 */
 	protected void showLogin() {
-		makeWindowTitle("Login Screen");
+		makeWindowTitle("Login");
 
 		loginButton.getElement().setInnerHTML("<b>Login</b>");
 		loginButton.addClickListener(new ClickListener() {
@@ -451,13 +499,21 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		RootPanel.get().add(loginPanel);
 	}
 
-	// TODO add correct event at button press
-	protected void loginFunc(String un, String pw) {
-		loginButton.getElement().setInnerText("un: " + un + ", pw: " + pw);
-	}
-
+	/**
+	 * Constructs a "loading screen" which
+	 * is shown until the client gets an answer
+	 * from StreamSpin.
+	 * If the answer is empty, or corrupted, then
+	 * makeMain will fail, and the login screen will
+	 * be shown indefinitely  
+	 * 
+	 * @author jenslyn
+	 */
 	private class startUpLoadingScreen extends PopupPanel {
 
+		/**
+		 * startUpLoadingScreen constructor
+		 */
 		public startUpLoadingScreen() {
 			super(false);
 			this.show();
@@ -485,7 +541,13 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		}
 	}
 	
-	public static String firstCharCapitalized(String s) {
+	/**
+	 * Takes a string and makes the first capitalizes the first letter
+	 * 
+	 * @param s a string which needs to have its first character capitalized
+	 * @return a string with its first letter capitalized
+	 */
+	private static String firstCharCapitalized(String s) {
 		return (s.length() > 0) ? Character.toUpperCase(s.charAt(0))+ s.substring(1) : s;
 	}
 }
