@@ -1,14 +1,26 @@
 package com.streamspin.client;
 
+/**
+ * Models an interest profile of a StreamSpin User
+ * 
+ * @author jenslyn
+ *
+ */
 public class Profile {
 	
 	private int id;
 	private String name;
 	
-	public Profile(int _id, String _name)
+	/**
+	 * Profile constructor
+	 * 
+	 * @param id The id of the profile
+	 * @param name The name/description assigned
+	 */
+	public Profile(int id, String name)
 	{
-		this.id = _id;
-		this.name = _name;
+		this.id = id;
+		this.name = name;
 	}
 	
 	public int getID()

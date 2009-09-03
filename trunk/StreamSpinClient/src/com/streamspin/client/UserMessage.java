@@ -13,6 +13,14 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * An overlay window showing the interface
+ * where the user can send messages to any 
+ * of his friends, which are online.
+ * 
+ * @author jenslyn
+ *
+ */
 public class UserMessage extends PopupPanel{
 	
 	private HorizontalPanel rightBottomPanel = new HorizontalPanel();
@@ -24,15 +32,26 @@ public class UserMessage extends PopupPanel{
 	private ListBox onlineFriendsListBox = new ListBox(true);
 	private String friendsXml = null;
 	private ArrayList<Friend> friendList = new ArrayList<Friend>();
+	/**
+	 * Reference to the {@link UserMessage} object, to be able to
+	 * reference the object inside a {@link Timer}
+	 * 
+	 * @see com.google.gwt.user.client.Timer
+	 */
 	final UserMessage self = this;
 	
-	
+	/**
+	 * UserMessage constructor
+	 */
 	public UserMessage()
 	{
 		super(false);
 		getFriends();
 	}
 	
+	/**
+	 * Retrieves all online friends
+	 */
 	private void getFriends()
 	{
 		final AnswerWrapper answer = new AnswerWrapper();
@@ -55,6 +74,9 @@ public class UserMessage extends PopupPanel{
 
 	}
 
+	/**
+	 * Constructs the UserMessage interface
+	 */
 	private void makeInterface() {
 		
 		rightBottomPanel.add(cancelButton);
@@ -82,10 +104,9 @@ public class UserMessage extends PopupPanel{
 			}
 		});
 		
-		//Window.alert("friendXml\n"+friendsXml);
 		if (!friendsXml.isEmpty()) {
 			try {
-				friendList = XmlParser.instance().friendXmlParsing(friendsXml);
+				friendList = XmlParser.instance().onlineFriendsXmlParsing(friendsXml);
 			} catch (Exception e) {
 				Window.alert("An Error occurred while retrieving and parsing the list of your friends\n\n"+ e.toString());
 			}
@@ -101,19 +122,6 @@ public class UserMessage extends PopupPanel{
 		}
 		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
-		onlineFriendsListBox.setVisibleItemCount(14);
-//		onlineFriendsListBox.addChangeListener(new ChangeListener(){
-//			public void onChange(Widget sender) {
-//				String msg = "Selected items:\n";
-//	    	    for (int i = 0; i < onlineFriendsListBox.getItemCount(); ++i) {
-//	    	      if (onlineFriendsListBox.isItemSelected(i)) {
-//	    	        msg += i+": "+onlineFriendsListBox.getItemText(i) + "\n" + onlineFriendsListBox.getValue(i)+"\n";
-//	    	      }
-//	    	    }
-//				Window.alert(msg);		
-//			}
-//			
-//		});
 		
 		messageTextArea.setSize("100%", ""+((Window.getClientHeight()*0.8)-30));
 		rightBottomPanel.setSize("100%", "30px");
