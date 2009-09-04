@@ -41,7 +41,7 @@ public class UserMessage extends PopupPanel{
 	final UserMessage self = this;
 	
 	/**
-	 * UserMessage constructor
+	 * {@link UserMessage} constructor
 	 */
 	public UserMessage()
 	{
@@ -122,7 +122,6 @@ public class UserMessage extends PopupPanel{
 		}
 		
 		onlineFriendsListBox.setSize("100px", ""+Window.getClientHeight()*0.8);
-		
 		messageTextArea.setSize("100%", ""+((Window.getClientHeight()*0.8)-30));
 		rightBottomPanel.setSize("100%", "30px");
 		mainPanel.setSize("100%", "100%");
@@ -130,7 +129,12 @@ public class UserMessage extends PopupPanel{
 		
 	}
 
-
+	/**
+	 * Sends a messages to another user
+	 * 
+	 * @param message The message to the other user
+	 * @param receiverID The id of the user receiving the message
+	 */
 	protected void sendMessage(String message, int receiverID) {
 		final AnswerWrapper answer = new AnswerWrapper();
 		
@@ -148,12 +152,5 @@ public class UserMessage extends PopupPanel{
 		};
 		
 		timer.scheduleRepeating(1000);
-		
 	}
-	
-	protected void sendMessageAsync() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

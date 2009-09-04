@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * ModulePrefs states the gadget preferences used by the google gadget.
  * 
- * StreamSpinClient is the main class which extends Gadget in order
+ * {@link StreamSpinClient} is the main class which extends Gadget in order
  * for GWT to be able to handle gadget specific features like adjustment
  * of the gadget container height (NeedsDynamicHeight)-
  * 
@@ -277,7 +277,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	/**
 	 * Changes the headline at the top of the client
 	 * 
-	 * @param headline client headline
+	 * @param headline Client headline
 	 */
 	protected void makeWindowTitle(String headline) {
 		titleBar.setText(headline);
@@ -439,7 +439,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		/**
 		 * mainTopWindowListBoxContentupdate constructor
 		 * 
-		 * @param answer holds the answer returned by StreamSpin
+		 * @param answer Holds the answer returned by StreamSpin
 		 */
 		public mainTopWindowListBoxContentupdate(AnswerWrapper answer) 
 		{
@@ -544,7 +544,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 	/**
 	 * Takes a string and makes the first capitalizes the first letter
 	 * 
-	 * @param s a string which needs to have its first character capitalized
+	 * @param s A string which needs to have its first character capitalized
 	 * @return a string with its first letter capitalized
 	 */
 	private static String firstCharCapitalized(String s) {

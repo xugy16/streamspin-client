@@ -32,7 +32,7 @@ public class XmlParser {
 	/**
 	 * Used to instantiate/call the singleton object
 	 * 
-	 * @return singleton object
+	 * @return {@link XmlParser} singleton object
 	 */
 	public static XmlParser instance()
 	{
@@ -50,7 +50,7 @@ public class XmlParser {
 	 * 
 	 * @return 		List with {@link Content} objects
 	 * 
-	 * @see com.streamspin.client.Content
+	 * @see 		com.streamspin.client.Content
 	 */
 	public ArrayList<Content> contentXmlParsing(String xml) {
 		
@@ -88,7 +88,7 @@ public class XmlParser {
 	 * @param xml all relevant information about the user in
 	 * StreamSpin populate an {@link UserInfo} object
 	 * 
-	 * @return an {@link UserInfo} object
+	 * @return {@link UserInfo} object
 	 * 
 	 * @throws Exception If the xml string is not formatted 
 	 * correctly or an empty string is passed to the function
