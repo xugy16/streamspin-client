@@ -12,7 +12,7 @@ public class Friend {
 	private String name;
 	
 	/**
-	 * Friend constructor
+	 * {@link Friend} constructor
 	 * 
 	 * @param id The id of the friend
 	 * @param name The name of the friend
@@ -26,7 +26,7 @@ public class Friend {
 	/**
 	 * Retrieves the friends name
 	 * 
-	 * @return Friends name
+	 * @return {@link Friend#name}
 	 */
 	public String getName() {
 		return name;
@@ -35,7 +35,7 @@ public class Friend {
 	/**
 	 * Gets the ID of the friend
 	 * 
-	 * @return Friends id
+	 * @return {@link Friend#id}
 	 */
 	public int getId() {
 		return id;

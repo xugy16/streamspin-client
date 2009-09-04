@@ -5,16 +5,57 @@ import com.google.gwt.gadgets.client.event.ContentFetchedHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 
+/**
+ * Handles all the requests made to StreamSpin
+ * 
+ * @author jenslyn
+ */
 public class StreamSpinContact {
 
+	/**
+	 * Holds the result returned by StreamSpin
+	 */
 	private String xml = null;
+	/**
+	 * Holds a reference to the {@link IntrinsicFeature} initialized in the
+	 * main loop
+	 */
 	private IntrinsicFeature intrinsics = StreamSpinClient.getIntrinsics();
 
+	/**
+	 * {@link StreamSpinContact} constructor
+	 */
 	protected StreamSpinContact() {
 	}
 
-	protected void contactStreamSpin(int requestType, AnswerWrapper answer,
-			String... args) {
+	/**
+	 * Continuously checks if the client have received an answer from
+	 * StreamSpin yet, and if yes, sets the answer in the
+	 * {@link AnswerWrapper} object
+	 * 
+	 * @param requestType 	The type of request made to StreamSpin <br/>
+	 *						1. Reserved. (For testing purposes) <br/>
+	 *						2. Returns any updates not delivered to client yet <br/>
+	 *						3. Used to deliver a message to another online user <br/>
+	 *						4. Sets the users interest profile <br/>
+	 *						5. Sets the users location <br/>
+	 *						6. Retrieves a users list of friends <br/>
+	 *						7. Sends a message to another user <br/>
+	 *						8. Validates the users credentials and returns all <br/>
+	 *						the information the client needs to populate its menus <br/>
+	 *						and internal structures at the time of login <p>
+	 * 
+	 * @param answer 		Callback object which will have its answer set when 
+	 * 						{@link StreamSpinContact} receives an answer from 
+	 * 						StreamSpin.
+	 * 
+	 * @param args			Any additional URL GET arguments beside username and
+	 * 						password, which is sent with all requests. 
+	 * 						arguments are passed as strings in the form
+	 * 						<b>"args=value"</b>
+	 */
+	protected void contactStreamSpin(int requestType, AnswerWrapper answer, String... args) {
+		
 		contactStreamSpinAsync(requestType, args);
 
 		final AnswerWrapper ans = answer;
@@ -22,16 +63,21 @@ public class StreamSpinContact {
 			public void run() {
 				if (xml != null) {
 					ans.setAnswer(xml);
-					// Window.alert("contactStreamSpin AS timer\n"+ans.getAnswer()+"\n");
-					xml = null;
 					cancel();
 				}
 			}
 		};
-
 		timer.scheduleRepeating(1000);
 	}
 
+	/**
+	 * Sends a GET request to StreamSpin, and assigns 
+	 * the answer to the "xml" string once received.
+	 * 
+	 * @param requestType 	See {@link StreamSpinContact#contactStreamSpin(int requestType, AnswerWrapper answer, String... args)}
+	 * 
+	 * @param args 			See {@link StreamSpinContact#contactStreamSpin(int requestType, AnswerWrapper answer, String... args)}
+	 */
 	private void contactStreamSpinAsync(int requestType, String... args) {
 		String arg = "";
 		for (String s : args) {
@@ -40,12 +86,9 @@ public class StreamSpinContact {
 
 		if (intrinsics == null)
 			Window.alert("a problem.. the google url-translation feature has failed..");
-		// Window.alert("contactStreamSpinAsync "+xml);
 		String url = "http://webclient.streamspin.com/Default.aspx?type="
 				+ requestType + "&un=" + StreamSpinClient.USERNAME + "&pw="
 				+ StreamSpinClient.PASSWORD + arg;
-		// String altUrl = "http://streamspin-client.googlecode.com/svn/trunk/StreamSpinClient/www/com.streamspin.StreamSpinClient/content.xml";
-		// Window.alert("url "+url);
 		try {
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(
