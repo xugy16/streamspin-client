@@ -72,23 +72,23 @@ public class StreamSpinContact {
 
 	/**
 	 * Sends a GET request to StreamSpin, and assigns 
-	 * the answer to the "xml" string once received.
+	 * the answer to {@link StreamSpinContact#xml} once received.
 	 * 
 	 * @param requestType 	See {@link StreamSpinContact#contactStreamSpin(int requestType, AnswerWrapper answer, String... args)}
 	 * 
 	 * @param args 			See {@link StreamSpinContact#contactStreamSpin(int requestType, AnswerWrapper answer, String... args)}
 	 */
 	private void contactStreamSpinAsync(int requestType, String... args) {
-		String arg = "";
+		String getArguments = "";
 		for (String s : args) {
-			arg += "&" + s;
+			getArguments += "&" + s;
 		}
 
 		if (intrinsics == null)
 			Window.alert("a problem.. the google url-translation feature has failed..");
 		String url = "http://webclient.streamspin.com/Default.aspx?type="
 				+ requestType + "&un=" + StreamSpinClient.USERNAME + "&pw="
-				+ StreamSpinClient.PASSWORD + arg;
+				+ StreamSpinClient.PASSWORD + getArguments;
 		try {
 			intrinsics.fetchContent(url, new ContentFetchedHandler() {
 				public void onContentFetched(

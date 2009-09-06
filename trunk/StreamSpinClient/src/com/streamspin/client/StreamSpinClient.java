@@ -118,7 +118,7 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 
 	/**
 	 * Initializes the {@link IntrinsicFeature} enabling the compiled
-	 * Java Script to call StreamSpin.com, no matter what domain the
+	 * JavaScript to call StreamSpin.com, no matter what domain the
 	 * gadget is hosted on.
 	 * 
 	 * @see com.google.gwt.gadgets.client.IntrinsicFeature
@@ -204,12 +204,11 @@ public class StreamSpinClient extends Gadget<UserPreferences> implements
 		public startService(int id, String StartUrl)
 		{
 			this.id = id;
-			this.startURL = StartUrl;
+			this.startURL = StartUrl+"?userid="+UID+"&serviceid="+id+"&unique=";
 		}
 		
 		public void execute() {
-			startURL = startURL+"?userid="+UID+"&serviceid="+id+"&unique="+System.currentTimeMillis();
-			Window.open(startURL, "_blank", null);
+			Window.open(startURL+System.currentTimeMillis(), "_blank", null);
 		}
 	}
 	
