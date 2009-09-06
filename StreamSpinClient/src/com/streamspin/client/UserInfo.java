@@ -30,8 +30,8 @@ public class UserInfo {
 	 * 							send its GPS position. 
 	 * @param sService			List of services which needs to be started 
 	 * 							manually.
-	 * @param profiles			List of user interest profiles.
-	 * @param serviceProfiles	List of services which can contain scripts.
+	 * @param profiles			List of user interest {@link Profile}.
+	 * @param serviceProfiles	List of {@link ServiceProfile} services which can contain scripts.
 	 */
 	public UserInfo(int uid, ArrayList<Location> locations, Boolean gpsDefault, int gpsThreshold, ArrayList<StartService> sService, ArrayList<Profile> profiles, ArrayList<ServiceProfile> serviceProfiles)
 	{
