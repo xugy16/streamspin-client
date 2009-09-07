@@ -1,0 +1,1 @@
+@java -Xmx256M -cp "%~dp0\src;%~dp0\bin;/home/jenslyn/tep/oophm/build/staging/gwt-linux-0.0.0/gwt-user.jar;/home/jenslyn/tep/oophm/build/staging/gwt-linux-0.0.0/gwt-dev.jar;/usr/local/gwt-gadgets-1.0.3/gwt-gadgets.jar" com.google.gwt.dev.GWTCompiler -out "%~dp0\www" %* com.streamspin.StreamSpinClient
